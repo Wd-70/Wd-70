@@ -73,6 +73,7 @@ components/
 ├── layout/              # 레이아웃 컴포넌트
 │   ├── Header.tsx
 │   ├── Footer.tsx
+│   ├── PageTransition.tsx  # 페이지 전환 로딩 인디케이터
 │   └── ThemeToggle.tsx
 ├── ui/                  # UI 컴포넌트
 │   ├── Button.tsx
@@ -84,6 +85,25 @@ components/
     ├── Projects.tsx
     └── Contact.tsx
 ```
+
+## 🚀 개발 가이드
+
+### 1. 개발 서버 실행
+```bash
+npm run dev
+```
+
+## 🎨 UI/UX 개선 사항
+
+### 1. 활성 링크 스타일링
+- 네비게이션 바에서 현재 활성화된 페이지 링크가 파란색으로 강조됩니다.
+- 모바일 메뉴에서도 동일하게 활성 링크가 강조됩니다.
+- `usePathname` 훅을 사용하여 현재 경로를 감지하고 스타일을 동적으로 적용합니다.
+
+### 2. 페이지 전환 로딩 인디케이터
+- 페이지 전환 시 상단에 로딩 바가 표시됩니다.
+- `PageTransition` 컴포넌트가 레이아웃에 추가되어 모든 페이지에서 작동합니다.
+- CSS 애니메이션을 사용하여 부드러운 로딩 효과를 제공합니다.
 
 ## 🚀 개발 가이드
 

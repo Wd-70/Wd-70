@@ -6,14 +6,10 @@ import { Button } from '@/components/ui/button';
 import { ExternalLink, Github, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
-interface ProjectPageProps {
-  params: {
-    slug: string;
-  };
-}
-
-export default function ProjectPage({ params }: ProjectPageProps) {
-  const project = projects.find((p) => p.slug === params.slug);
+export default async function ProjectPage({ params }: { params: { slug: string } }) {
+  // params를 비동기적으로 처리
+  const { slug } = await Promise.resolve(params);
+  const project = projects.find((p) => p.slug === slug);
 
   if (!project) {
     notFound();
@@ -83,14 +79,18 @@ export default function ProjectPage({ params }: ProjectPageProps) {
   );
 }
 
-export function generateStaticParams() {
+// 정적 경로 생성
+export async function generateStaticParams() {
   return projects.map((project) => ({
     slug: project.slug,
   }));
 }
 
-export function generateMetadata({ params }: ProjectPageProps) {
-  const project = projects.find((p) => p.slug === params.slug);
+// 메타데이터 생성
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  // params를 비동기적으로 처리
+  const { slug } = await Promise.resolve(params);
+  const project = projects.find((p) => p.slug === slug);
 
   if (!project) {
     return {
@@ -102,9 +102,16 @@ export function generateMetadata({ params }: ProjectPageProps) {
     title: `${project.title} | Wd-70`,
     description: project.description,
     openGraph: {
-      title: project.title,
+      title: `${project.title} | Wd-70`,
       description: project.description,
-      images: [project.image],
+      images: [
+        {
+          url: project.image,
+          width: 1200,
+          height: 630,
+          alt: project.title,
+        },
+      ],
     },
   };
 }

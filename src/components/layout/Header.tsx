@@ -1,13 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { FiSun, FiMoon, FiMenu, FiX } from "react-icons/fi";
 import { useState, useEffect } from "react";
 
 const navItems = [
-  { name: "소개", href: "/about" },
+  { name: "홈", href: "/" },
   { name: "프로젝트", href: "/projects" },
+  { name: "소개", href: "/about" },
   { name: "연락처", href: "/contact" },
 ];
 
@@ -15,6 +17,7 @@ export function Header() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   // 컴포넌트가 마운트된 후에만 테마를 변경하도록 함 (hydration 에러 방지)
   useEffect(() => {
@@ -43,15 +46,24 @@ export function Header() {
 
         {/* 데스크톱 네비게이션 */}
         <nav className="hidden md:flex items-center space-x-8">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
-            >
-              {item.name}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const isActive = item.href === '/' 
+              ? pathname === '/' 
+              : pathname.startsWith(item.href) && item.href !== '/';
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`transition-colors duration-200 ${
+                  isActive
+                    ? 'text-blue-600 dark:text-blue-400 font-semibold'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+                }`}
+              >
+                {item.name}
+              </Link>
+            );
+          })}
           <button
             onClick={toggleTheme}
             className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
@@ -75,16 +87,25 @@ export function Header() {
       {isMenuOpen && (
         <div className="md:hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const isActive = item.href === '/' 
+                ? pathname === '/' 
+                : pathname.startsWith(item.href) && item.href !== '/';
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`py-2 px-4 rounded-md transition-colors duration-200 ${
+                    isActive
+                      ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-semibold'
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                  }`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
             <button
               onClick={() => {
                 toggleTheme();

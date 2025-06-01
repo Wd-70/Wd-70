@@ -3,6 +3,7 @@ import { Inter, Fira_Code } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PageTransition } from "@/components/layout/PageTransition";
 import "./globals.css";
 
 // 폰트 설정
@@ -31,6 +32,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://yourdomain.com'), // 실제 도메인으로 변경
   title: "Wd-70 | 개발자 포트폴리오",
   description: "Wd-70의 개발 블로그 및 포트폴리오 사이트입니다. Flutter, Next.js, Python을 활용한 프로젝트를 소개합니다.",
   keywords: ["개발자 포트폴리오", "Wd-70", "Next.js", "Flutter", "Python", "웹 개발"],
@@ -68,6 +70,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <PageTransition />
           <Header />
           <main className="flex-grow pt-20">
             {children}
