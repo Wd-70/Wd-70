@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Prevent FOUC */
+html {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+html.loaded {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* 메인 페이지를 제외한 모든 페이지의 메인 콘텐츠에 상단 패딩 추가 */
+main:not(.home-page) {
+  padding-top: 6rem; /* 헤더 높이에 맞춤 (h-22 = 5.5rem) */
+  min-height: calc(100vh - 6rem); /* 뷰포트 높이에서 헤더 높이를 뺌 */
+}
+
+/* 모바일 메뉴가 열렸을 때 추가 여백 조정 */@media (max-width: 767px) {
+  main:not(.home-page) {
+    padding-top: 6rem;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -52,10 +76,32 @@
 @layer base {
   * {
     @apply border-border;
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
+  
+  /* 테마 로드 전에는 전환 효과 비활성화 */
+  html:not(.theme-loaded) * {
+    transition: none !important;
+  }
+  
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    transition: background-color 150ms ease, color 150ms ease;
+  }
+  
+  /* 전환 효과가 필요 없는 요소 */
+  img,
+  svg,
+  video,
+  iframe,
+  .no-transition,
+  .no-transition *,
+  .icon,
+  .icon * {
+    transition: none !important;
   }
 }
 

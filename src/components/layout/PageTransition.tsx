@@ -2,37 +2,51 @@
 
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export function PageTransition() {
-  const [isLoading, setIsLoading] = useState(false);
   const pathname = usePathname();
+  const [isLoading, setIsLoading] = useState(false);
+  const [prevPathname, setPrevPathname] = useState(pathname);
 
   useEffect(() => {
-    // 페이지 전환 시작 시 로딩 상태 활성화
-    setIsLoading(true);
-
-    // 페이지 로드 완료 후 로딩 상태 비활성화
-    const handleLoad = () => {
-      setIsLoading(false);
-    };
-
-    window.addEventListener('load', handleLoad);
-    // 약간의 지연 후에도 로딩 상태를 해제 (안전장치)
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-
-    return () => {
-      window.removeEventListener('load', handleLoad);
-      clearTimeout(timer);
-    };
-  }, [pathname]);
-
-  if (!isLoading) return null;
+    // 경로가 변경되면 로딩 상태 활성화
+    if (pathname !== prevPathname) {
+      setIsLoading(true);
+      setPrevPathname(pathname);
+      
+      // 1초 후에 로딩 상태 비활성화 (안전장치)
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [pathname, prevPathname]);
 
   return (
-    <div className="fixed top-0 left-0 right-0 h-1 z-50 overflow-hidden">
-      <div className="h-full bg-blue-500 animate-loading"></div>
-    </div>
+    <AnimatePresence>
+      {isLoading && (
+        <motion.div
+          className="fixed top-0 left-0 right-0 h-1 bg-blue-500 z-50 origin-left"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          exit={{ scaleX: 0 }}
+          transition={{ duration: 0.3, ease: 'easeInOut' }}
+        >
+          <motion.div
+            className="h-full bg-blue-600 w-full"
+            initial={{ width: '0%' }}
+            animate={{ width: '100%' }}
+            transition={{
+              duration: 1.5,
+              ease: 'easeInOut',
+              repeat: Infinity,
+              repeatType: 'reverse',
+            }}
+          />
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

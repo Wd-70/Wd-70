@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FiGithub, FiTwitter, FiLinkedin, FiMail } from "react-icons/fi";
+import { FiGithub, FiTwitter, FiLinkedin, FiMail, FiX } from "react-icons/fi";
 import { TypeAnimation } from "react-type-animation";
 
 const socialLinks = [
@@ -22,7 +22,7 @@ const socialLinks = [
   },
   {
     name: "Email",
-    href: "mailto:your.email@example.com",
+    href: "mailto:kjk7052@gmail.com",
     icon: FiMail,
   },
 ];
