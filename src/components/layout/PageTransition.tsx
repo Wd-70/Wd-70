@@ -2,7 +2,16 @@
 
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+import dynamic from 'next/dynamic';
+
+// Framer Motion을 동적으로 임포트
+const MotionDiv = dynamic(() => import('framer-motion').then((mod) => mod.motion.div), {
+  ssr: false,
+});
+
+const AnimatePresence = dynamic(() => import('framer-motion').then((mod) => mod.AnimatePresence), {
+  ssr: false,
+});
 
 export function PageTransition() {
   const pathname = usePathname();
@@ -27,25 +36,29 @@ export function PageTransition() {
   return (
     <AnimatePresence>
       {isLoading && (
-        <motion.div
+        <MotionDiv
           className="fixed top-0 left-0 right-0 h-1 bg-blue-500 z-50 origin-left"
           initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          exit={{ scaleX: 0 }}
-          transition={{ duration: 0.3, ease: 'easeInOut' }}
+          animate={{ 
+            scaleX: 1,
+            transition: { duration: 0.5, ease: "easeInOut" }
+          }}
+          exit={{ 
+            scaleX: 1,
+            opacity: 0,
+            transition: { duration: 0.3, ease: "easeInOut" }
+          }}
+          onAnimationComplete={() => setIsLoading(false)}
         >
-          <motion.div
-            className="h-full bg-blue-600 w-full"
+          <MotionDiv
+            className="h-full bg-blue-300"
             initial={{ width: '0%' }}
-            animate={{ width: '100%' }}
-            transition={{
-              duration: 1.5,
-              ease: 'easeInOut',
-              repeat: Infinity,
-              repeatType: 'reverse',
+            animate={{
+              width: '100%',
+              transition: { duration: 0.8, ease: "easeInOut" }
             }}
           />
-        </motion.div>
+        </MotionDiv>
       )}
     </AnimatePresence>
   );

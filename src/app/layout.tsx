@@ -2,7 +2,16 @@
 
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+import dynamic from 'next/dynamic';
+
+// Framer Motion을 클라이언트 사이드에서만 로드
+const MotionDiv = dynamic(() => import('framer-motion').then((mod) => mod.motion.div), {
+  ssr: false,
+});
+
+const AnimatePresence = dynamic(() => import('framer-motion').then((mod) => mod.AnimatePresence), {
+  ssr: false,
+});
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -92,7 +101,7 @@ export default function RootLayout({
           <PageTransition />
           <Header />
           <AnimatePresence mode="wait" initial={false}>
-            <motion.div
+            <MotionDiv
               key={pathname}
               initial="initial"
               animate="animate"
@@ -110,7 +119,7 @@ export default function RootLayout({
               className="min-h-screen w-full"
             >
               {children}
-            </motion.div>
+            </MotionDiv>
           </AnimatePresence>
           <Footer />
           <Toaster position="top-center" richColors />

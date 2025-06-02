@@ -266,7 +266,62 @@ chore: 빌드 프로세스, 패키지 매니저 설정 등
 
 ---
 
-## 📝 MongoDB 연락처 게시판 개발 계획
+## 📝 연락처 폼 & 이메일 전송 기능
+
+### 1. 구현된 기능
+- **연락처 폼**: 방문자가 이름, 이메일, 메시지를 입력할 수 있는 반응형 폼
+- **유효성 검증**: Zod를 사용한 클라이언트/서버 사이드 유효성 검증
+- **이메일 전송**: nodemailer를 사용한 Gmail SMTP 연동
+- **보안**: IP 주소 및 사용자 에이전트 로깅
+- **사용자 피드백**: 성공/실패 시 토스트 알림
+
+### 2. 기술 스택
+- **프론트엔드**: React Hook Form, Sonner (토스트 알림)
+- **백엔드**: Next.js API Routes
+- **이메일**: nodemailer, Gmail SMTP
+- **유효성 검증**: Zod
+- **스타일링**: Tailwind CSS, Framer Motion (애니메이션)
+
+### 3. 환경 변수 설정
+```env
+# Gmail SMTP 설정
+EMAIL_USER=your-email@gmail.com
+EMAIL_PASS=your-app-password  # Gmail 앱 비밀번호
+EMAIL_TO=recipient@example.com  # 메시지를 받을 이메일 주소
+```
+
+### 4. Gmail 설정 가이드
+1. [Google 계정 보안](https://myaccount.google.com/security)에서 2단계 인증 활성화
+2. [앱 비밀번호](https://myaccount.google.com/apppasswords)에서 새 앱 비밀번호 생성
+3. 앱 유형: "기타(이름 지정)" 선택 후 앱 이름 지정 (예: "포트폴리오 사이트")
+4. 생성된 16자리 비밀번호를 `EMAIL_PASS`에 입력
+
+### 5. 주요 파일 구조
+```
+src/
+├── app/
+│   └── contact/
+│       └── page.tsx          # 연락처 페이지
+│   └── api/
+│       └── contact/
+│           └── route.ts     # 연락처 API 라우트
+├── components/
+│   └── contact/
+│       └── ContactForm.tsx  # 연락처 폼 컴포넌트
+└── lib/
+    ├── email.ts           # 이메일 전송 유틸리티
+    └── validations/
+        └── contact.ts    # 연락처 폼 유효성 검증 스키마
+```
+
+### 6. 향후 개선 사항
+- [ ] 스팸 방지를 위한 reCAPTCHA 연동
+- [ ] 이메일 템플릿 개선
+- [ ] 관리자 페이지 연동 (메시지 관리)
+
+---
+
+## 📝 MongoDB 연락처 게시판 개발 계획 (예정)
 
 ### 1. 기술 스택
 - **데이터베이스**: MongoDB Atlas (무료 티어)
