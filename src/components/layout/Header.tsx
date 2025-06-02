@@ -8,8 +8,8 @@ import { useState, useEffect } from "react";
 
 const navItems = [
   { name: "홈", href: "/" },
-  { name: "프로젝트", href: "/projects" },
   { name: "소개", href: "/about" },
+  { name: "프로젝트", href: "/projects" },
   { name: "연락처", href: "/contact" },
 ];
 
