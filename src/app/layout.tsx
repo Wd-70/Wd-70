@@ -8,6 +8,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { Inter, Fira_Code } from "next/font/google";
+import { Toaster } from 'sonner';
 import "./globals.css";
 
 // 폰트 설정
@@ -112,6 +113,7 @@ export default function RootLayout({
             </motion.div>
           </AnimatePresence>
           <Footer />
+          <Toaster position="top-center" richColors />
         </ThemeProvider>
       </body>
     </html>
