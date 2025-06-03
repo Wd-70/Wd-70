@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const contactSchema = z.object({
   name: z
     .string()
-    .min(2, { message: '이름은 2자 이상 입력해주세요.' })
+    .min(1, { message: '이름은 1자 이상 입력해주세요.' })
     .max(50, { message: '이름은 50자 이하로 입력해주세요.' }),
   email: z
     .string()

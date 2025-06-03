@@ -65,7 +65,7 @@ export function ContactForm() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.1 }}
       className="w-full max-w-2xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg"
     >
       <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
@@ -79,7 +79,7 @@ export function ContactForm() {
               <FiUser className="h-5 w-5 text-gray-400" />
             </div>
             <Input
-              placeholder="이름"
+              placeholder="닉네임"
               className="pl-10"
               disabled={isSubmitting}
               {...register('name')}
@@ -118,7 +118,7 @@ export function ContactForm() {
               <FiMessageSquare className="h-5 w-5 text-gray-400" />
             </div>
             <Textarea
-              placeholder="메시지를 입력하세요"
+              placeholder="메시지를 입력해 주세요"
               className="min-h-[150px] pl-10"
               disabled={isSubmitting}
               {...register('message')}

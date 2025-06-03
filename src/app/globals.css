@@ -16,8 +16,8 @@ html.loaded {
 
 /* 메인 페이지를 제외한 모든 페이지의 메인 콘텐츠에 상단 패딩 추가 */
 main:not(.home-page) {
-  padding-top: 6rem; /* 헤더 높이에 맞춤 (h-22 = 5.5rem) */
-  min-height: calc(100vh - 6rem); /* 뷰포트 높이에서 헤더 높이를 뺌 */
+  padding-top: 2.5rem; /* 상단 패딩 2rem으로 조정 */
+  min-height: calc(100vh - 4rem); /* 뷰포트 높이에서 헤더 높이를 뺌 */
 }
 
 /* 모바일 메뉴가 열렸을 때 추가 여백 조정 */@media (max-width: 767px) {

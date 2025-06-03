@@ -98,31 +98,14 @@ export default function RootLayout({
           }}
         />
         <ThemeProvider>
-          <PageTransition />
-          <Header />
-          <AnimatePresence mode="wait" initial={false}>
-            <MotionDiv
-              key={pathname}
-              initial="initial"
-              animate="animate"
-              variants={{
-                initial: { opacity: 0, y: 10 },
-                animate: { 
-                  opacity: 1, 
-                  y: 0,
-                  transition: { 
-                    duration: 0.3, 
-                    ease: "easeOut" 
-                  } 
-                }
-              }}
-              className="min-h-screen w-full"
-            >
+          <PageTransition>
+            <Header />
+            <main className="min-h-screen w-full">
               {children}
-            </MotionDiv>
-          </AnimatePresence>
-          <Footer />
-          <Toaster position="top-center" richColors />
+            </main>
+            <Footer />
+            <Toaster position="top-center" richColors />
+          </PageTransition>
         </ThemeProvider>
       </body>
     </html>

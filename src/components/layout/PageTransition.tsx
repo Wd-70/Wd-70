@@ -1,65 +1,94 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import dynamic from 'next/dynamic';
+import { motion } from 'framer-motion';
 
-// Framer Motion을 동적으로 임포트
-const MotionDiv = dynamic(() => import('framer-motion').then((mod) => mod.motion.div), {
-  ssr: false,
-});
+// 메인 콘텐츠 전환 애니메이션
+const contentVariants = {
+  hidden: {
+    y: 20,  // 아래에서 위로 이동
+    opacity: 0,  // 투명도 0에서 시작
+    filter: 'blur(2px)',  // 약간의 블러 효과
+  },
+  visible: {
+    y: 0,  // 원래 위치로
+    opacity: 1,  // 완전히 불투명해짐
+    filter: 'blur(0)',  // 블러 제거
+    transition: {
+      duration: 0.4,  // 애니메이션 지속 시간
+      ease: "easeInOut", // [0.16, 1, 0.3, 1],  // 부드러운 가속/감속
+      opacity: {
+        duration: 0.4,  // 페이드인은 조금 더 빠르게
+      },
+      y: {
+        duration: 0,  // 이동 애니메이션 지속 시간
+      },
+      filter: {
+        duration: 0.4,  // 블러 제거 애니메이션
+      }
+    }
+  }
+};
 
-const AnimatePresence = dynamic(() => import('framer-motion').then((mod) => mod.AnimatePresence), {
-  ssr: false,
-});
+type PageTransitionProps = {
+  children: React.ReactNode;
+};
 
-export function PageTransition() {
+export function PageTransition({ children }: PageTransitionProps) {
   const pathname = usePathname();
-  const [isLoading, setIsLoading] = useState(false);
-  const [prevPathname, setPrevPathname] = useState(pathname);
+  const [isInitial, setIsInitial] = useState(true);
 
   useEffect(() => {
-    // 경로가 변경되면 로딩 상태 활성화
-    if (pathname !== prevPathname) {
-      setIsLoading(true);
-      setPrevPathname(pathname);
-      
-      // 1초 후에 로딩 상태 비활성화 (안전장치)
-      const timer = setTimeout(() => {
-        setIsLoading(false);
-      }, 1000);
-      
-      return () => clearTimeout(timer);
-    }
-  }, [pathname, prevPathname]);
+    // 초기 로드 후 애니메이션 활성화
+    const timer = setTimeout(() => {
+      setIsInitial(false);
+    }, 0);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // 초기 로드 시에는 애니메이션 없이 바로 표시
+  if (isInitial) return <>{children}</>;
+
+  // children을 배열로 변환
+  const childrenArray = React.Children.toArray(children);
+  
+  // 첫 번째 요소가 Header인지 확인
+  const firstChild = childrenArray[0];
+  const isFirstChildHeader = React.isValidElement(firstChild) && 
+                           firstChild.type && 
+                           firstChild.type.toString().includes('Header');
+  
+  // Header가 있으면 분리, 없으면 children 전체에 애니메이션 적용
+  if (isFirstChildHeader) {
+    const [header, ...rest] = childrenArray;
+    return (
+      <>
+        {header}
+        <motion.div
+          key={pathname}
+          initial="hidden"
+          animate="visible"
+          variants={contentVariants}
+          className="min-h-[calc(100vh-4rem)] w-full pt-4"  // 헤더 높이만큼 상단 여백 조정
+        >
+          {rest}
+        </motion.div>
+      </>
+    );
+  }
+
 
   return (
-    <AnimatePresence>
-      {isLoading && (
-        <MotionDiv
-          className="fixed top-0 left-0 right-0 h-1 bg-blue-500 z-50 origin-left"
-          initial={{ scaleX: 0 }}
-          animate={{ 
-            scaleX: 1,
-            transition: { duration: 0.5, ease: "easeInOut" }
-          }}
-          exit={{ 
-            scaleX: 1,
-            opacity: 0,
-            transition: { duration: 0.3, ease: "easeInOut" }
-          }}
-          onAnimationComplete={() => setIsLoading(false)}
-        >
-          <MotionDiv
-            className="h-full bg-blue-300"
-            initial={{ width: '0%' }}
-            animate={{
-              width: '100%',
-              transition: { duration: 0.8, ease: "easeInOut" }
-            }}
-          />
-        </MotionDiv>
-      )}
-    </AnimatePresence>
+    <motion.div
+      key={pathname}
+      initial="hidden"
+      animate="visible"
+      variants={contentVariants}
+      className="min-h-[calc(100vh-4rem)] w-full pt-4"  // 헤더가 없는 경우에도 동일한 여백 적용
+    >
+      {children}
+    </motion.div>
   );
 }
