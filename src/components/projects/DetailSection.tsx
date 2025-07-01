@@ -44,7 +44,7 @@ const DetailSection: React.FC<DetailSectionProps> = ({
   return (
     <div 
       ref={ref}
-      className={`min-h-screen flex items-center justify-center p-8 md:p-16 ${reverse ? 'bg-gray-50' : 'bg-white'}`}
+      className={`w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] flex items-center justify-center py-16 md:py-20 px-8 md:px-16 ${reverse ? 'bg-gray-50 dark:bg-gray-800' : 'bg-white dark:bg-gray-900'}`}
     >
       <motion.div 
         className={`flex flex-col md:flex-row items-center justify-between w-full max-w-6xl mx-auto gap-12 ${

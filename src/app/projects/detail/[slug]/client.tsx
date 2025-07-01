@@ -158,7 +158,7 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
         initial="hidden"
         animate="visible"
         variants={containerVariants}
-        className="pb-12"
+        className=""
       >
         <div className="container mx-auto px-4 py-12 max-w-6xl">
           <Button asChild variant="ghost" className="mb-6">
