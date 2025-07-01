@@ -30,12 +30,17 @@ const socialLinks = [
 
 export function Hero() {
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-8">
-      {/* 🌟 새로운 배경 그라데이션 메시 */}
-      <div className="absolute inset-0 bg-brand-primary opacity-5 dark:opacity-10"></div>
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-purple-500/10 to-transparent"></div>
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      {/* 🌟 고정된 전체 화면 배경 - 모든 여백 제거 */}
+      <div className="fixed inset-0 w-full h-full bg-brand-primary opacity-5 dark:opacity-10 z-0"></div>
+      <div className="fixed inset-0 w-full h-full bg-gradient-to-br from-transparent via-purple-500/10 to-transparent z-0"></div>
       
-      <div className="container mx-auto px-4 py-8 relative z-10">
+      {/* 📱 모바일 상단 여백 완전 제거용 추가 배경 */}
+      <div className="absolute -inset-10 bg-white dark:bg-gray-900 -z-10"></div>
+      <div className="absolute -inset-10 bg-brand-primary opacity-5 dark:opacity-10 -z-5"></div>
+      <div className="absolute -inset-10 bg-gradient-to-br from-transparent via-purple-500/10 to-transparent -z-5"></div>
+      
+      <div className="container mx-auto px-4 py-8 pt-24 md:pt-16 relative z-20">
         <div className="flex flex-col items-center text-center">
           <div className="mb-8">
             {/* 🎨 혁신적인 3D 아바타 */}

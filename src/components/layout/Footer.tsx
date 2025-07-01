@@ -1,59 +1,255 @@
 import Link from "next/link";
-import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { FaGithub, FaTwitter, FaLinkedin, FaHeart } from "react-icons/fa";
+import { SiNextdotjs, SiTailwindcss, SiFramer, SiTypescript, SiReact } from "react-icons/si";
 
 const socialLinks = [
   {
     name: "GitHub",
     href: "https://github.com/Wd-70",
     icon: FaGithub,
+    color: "hover:text-gray-900 dark:hover:text-white"
   },
   // {
   //   name: "Twitter",
   //   href: "https://twitter.com/yourusername",
   //   icon: FaTwitter,
+  //   color: "hover:text-blue-500"
   // },
   // {
   //   name: "LinkedIn",
   //   href: "https://linkedin.com/in/yourusername",
   //   icon: FaLinkedin,
+  //   color: "hover:text-blue-600"
   // },
 ];
 
-export function Footer() {
-  return (
-    <footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
-      <div className="container mx-auto px-4 py-12">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-6 md:mb-0">
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">Wd-70</h2>
-            <p className="text-gray-600 dark:text-gray-400">
-              개발자 포트폴리오
-            </p>
-          </div>
+const techStack = [
+  { name: "Next.js", icon: SiNextdotjs, color: "text-black dark:text-white" },
+  { name: "React", icon: SiReact, color: "text-blue-500" },
+  { name: "TypeScript", icon: SiTypescript, color: "text-blue-600" },
+  { name: "Tailwind CSS", icon: SiTailwindcss, color: "text-cyan-500" },
+  { name: "Framer Motion", icon: SiFramer, color: "text-pink-500" },
+];
 
-          <div className="flex space-x-6">
-            {socialLinks.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors duration-200"
-                aria-label={item.name}
+export function Footer() {
+  const containerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+
+  return (
+    <footer className="relative overflow-hidden">
+      {/* 🌈 테마별 그라데이션 배경 */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-100 via-gray-50 to-indigo-100 dark:from-purple-900 dark:via-gray-900 dark:to-indigo-900"></div>
+      
+      {/* 🌊 애니메이션 웨이브 오버레이 */}
+      <div className="absolute inset-0 opacity-20">
+        <svg className="w-full h-full" viewBox="0 0 1200 200" preserveAspectRatio="none">
+          {/* 첫 번째 웨이브 */}
+          <motion.path
+            animate={{
+              d: [
+                "M0,100 C300,20 600,180 1200,50 L1200,200 L0,200 Z",
+                "M0,120 C300,40 600,160 1200,70 L1200,200 L0,200 Z",
+                "M0,80 C300,0 600,200 1200,30 L1200,200 L0,200 Z",
+                "M0,100 C300,20 600,180 1200,50 L1200,200 L0,200 Z"
+              ]
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            fill="url(#waveGradient1)"
+          />
+          
+          {/* 두 번째 웨이브 (반대 방향) */}
+          <motion.path
+            animate={{
+              d: [
+                "M0,80 C300,160 600,20 1200,140 L1200,200 L0,200 Z",
+                "M0,60 C300,140 600,40 1200,120 L1200,200 L0,200 Z",
+                "M0,100 C300,180 600,0 1200,160 L1200,200 L0,200 Z",
+                "M0,80 C300,160 600,20 1200,140 L1200,200 L0,200 Z"
+              ]
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1
+            }}
+            fill="url(#waveGradient2)"
+          />
+          
+          {/* 세 번째 웨이브 (더 빠른 주기) */}
+          <motion.path
+            animate={{
+              d: [
+                "M0,60 C300,140 600,40 1200,160 L1200,200 L0,200 Z",
+                "M0,90 C300,110 600,70 1200,130 L1200,200 L0,200 Z",
+                "M0,40 C300,170 600,10 1200,190 L1200,200 L0,200 Z",
+                "M0,60 C300,140 600,40 1200,160 L1200,200 L0,200 Z"
+              ]
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2
+            }}
+            fill="url(#waveGradient3)"
+          />
+          
+          <defs>
+            {/* 첫 번째 웨이브 그라데이션 */}
+            <linearGradient id="waveGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.6" />
+              <stop offset="50%" stopColor="#06B6D4" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#EC4899" stopOpacity="0.6" />
+            </linearGradient>
+            
+            {/* 두 번째 웨이브 그라데이션 */}
+            <linearGradient id="waveGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#10B981" stopOpacity="0.4" />
+              <stop offset="50%" stopColor="#F59E0B" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.4" />
+            </linearGradient>
+            
+            {/* 세 번째 웨이브 그라데이션 */}
+            <linearGradient id="waveGradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#06B6D4" stopOpacity="0.3" />
+              <stop offset="50%" stopColor="#EC4899" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#10B981" stopOpacity="0.3" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <motion.div 
+        className="relative z-10 container mx-auto px-4 py-16"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-12">
+          {/* 🎨 프리미엄 브랜드 섹션 */}
+          <motion.div className="mb-8 lg:mb-0" variants={itemVariants}>
+            <motion.h2 
+              className="text-4xl font-bold text-gray-800 dark:text-white mb-3"
+              whileHover={{ scale: 1.05 }}
+            >
+              <span className="bg-gradient-to-r from-purple-600 via-pink-500 to-cyan-500 dark:from-purple-400 dark:via-pink-400 dark:to-cyan-400 bg-clip-text text-transparent">
+                Wd-70
+              </span>
+            </motion.h2>
+            <p className="text-gray-600 dark:text-gray-300 text-lg mb-4">
+              AI 바이브 코딩으로 혁신을 만드는 개발자
+            </p>
+            <p className="text-gray-500 dark:text-gray-400 text-sm max-w-md">
+              최신 기술과 창의적 아이디어로 사용자 경험을 혁신하는 풀스택 개발자입니다.
+            </p>
+          </motion.div>
+
+          {/* 🚀 소셜 링크 섹션 */}
+          <motion.div className="flex flex-col items-center lg:items-end" variants={itemVariants}>
+            <h3 className="text-gray-800 dark:text-white font-semibold mb-4">Connect with me</h3>
+            <div className="flex space-x-4">
+              {socialLinks.map((item, index) => (
+                <motion.a
+                  key={item.name}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`group relative p-4 rounded-xl bg-white/20 dark:bg-white/10 backdrop-blur-sm border border-gray-300/30 dark:border-white/20 text-gray-600 dark:text-gray-300 ${item.color} transition-all duration-300`}
+                  aria-label={item.name}
+                  whileHover={{ 
+                    scale: 1.1, 
+                    y: -5,
+                    boxShadow: "0 10px 30px rgba(139, 92, 246, 0.3)"
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <item.icon className="h-6 w-6 relative z-10" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* 🛠️ 기술 스택 섹션 */}
+        <motion.div 
+          className="border-t border-gray-300/20 dark:border-white/20 pt-8 mb-8"
+          variants={itemVariants}
+        >
+          <h3 className="text-gray-800 dark:text-white font-semibold mb-6 text-center">Built with</h3>
+          <div className="grid grid-cols-5 gap-4 max-w-md mx-auto">
+            {techStack.map((tech, index) => (
+              <motion.div
+                key={tech.name}
+                className="group flex flex-col items-center"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ scale: 1.1, y: -3 }}
               >
-                <item.icon className="h-6 w-6" />
-              </a>
+                <div className="p-3 rounded-xl bg-white/30 dark:bg-white/10 backdrop-blur-sm border border-gray-300/30 dark:border-white/20 mb-2 group-hover:bg-white/50 dark:group-hover:bg-white/20 transition-all duration-300 w-full aspect-square flex items-center justify-center">
+                  <tech.icon className={`h-6 w-6 ${tech.color}`} />
+                </div>
+                <span className="text-gray-600 dark:text-gray-400 text-xs font-medium text-center">{tech.name}</span>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800 text-center text-gray-500 dark:text-gray-400 text-sm">
-          <p>© {new Date().getFullYear()} Wd-70. All rights reserved.</p>
-          <p className="mt-2">
-            Built with Next.js, Tailwind CSS, and Framer Motion
-          </p>
-        </div>
-      </div>
+        {/* 💝 Copyright 섹션 */}
+        <motion.div 
+          className="border-t border-gray-300/20 dark:border-white/20 pt-8 text-center"
+          variants={itemVariants}
+        >
+          <motion.p 
+            className="text-gray-500 dark:text-gray-400 text-sm mb-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+          >
+            © {new Date().getFullYear()} Wd-70. All rights reserved.
+          </motion.p>
+          <motion.p 
+            className="text-gray-600 dark:text-gray-500 text-xs flex items-center justify-center gap-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+          >
+            Made with 
+            <motion.span
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 1, repeat: Infinity, repeatDelay: 3 }}
+            >
+              <FaHeart className="text-red-500" />
+            </motion.span>
+            and cutting-edge technology
+          </motion.p>
+        </motion.div>
+      </motion.div>
     </footer>
   );
 }
