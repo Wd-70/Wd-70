@@ -16,7 +16,7 @@ export default function MyStory() {
             <div className="p-6 bg-gray-50 dark:bg-gray-800 rounded-xl">
               <h3 className="text-xl font-semibold mb-3">개발 철학</h3>
               <p className="text-gray-700 dark:text-gray-300">
-                "사용자의 불편함을 예측하고 해결하는 개발자"
+                사용자의 불편함을 예측하고 해결하는 개발자
               </p>
               <p className="mt-3">
                 단순한 기능 구현을 넘어, 사용자가 경험할 수 있는 모든 불편함을 사전에 예측하고

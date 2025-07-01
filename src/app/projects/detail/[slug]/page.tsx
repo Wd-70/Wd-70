@@ -3,8 +3,8 @@ import { projects } from '@/lib/data/projects';
 import ProjectDetailClient from './client';
 
 // 프로젝트 데이터를 가져오는 함수
-function getProject(slug: string) {
-  return projects.find((p) => p.slug === slug);
+function getProject(id: string) {
+  return projects.find((p) => p.id === id);
 }
 
 export default async function ProjectPage({ params }: { params: { slug: string } }) {
@@ -24,7 +24,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
 // 정적 경로 생성
 export async function generateStaticParams() {
   return projects.map((project) => ({
-    slug: project.slug,
+    slug: project.id,
   }));
 }
 
@@ -32,7 +32,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   // params를 비동기적으로 처리
   const { slug } = await Promise.resolve(params);
-  const project = projects.find((p) => p.slug === slug);
+  const project = projects.find((p) => p.id === slug);
 
   if (!project) {
     return {
@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       description: project.description,
       images: [
         {
-          url: project.image,
+          url: project.thumbnail,
           width: 1200,
           height: 630,
           alt: project.title,

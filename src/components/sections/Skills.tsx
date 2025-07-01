@@ -1,7 +1,7 @@
 // components/sections/Skills.tsx
 'use client';
 
-import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion';
 import { FaReact, FaPython, FaJava } from 'react-icons/fa';
 import { SiNextdotjs, SiTypescript, SiJavascript, SiOpenai, SiFlutter, SiDart } from 'react-icons/si';
 

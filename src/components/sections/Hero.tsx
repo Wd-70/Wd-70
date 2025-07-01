@@ -1,7 +1,9 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { FiGithub, FiTwitter, FiLinkedin, FiMail } from "react-icons/fi";
 import { TypeAnimation } from "react-type-animation";
+import Link from "next/link";
 
 const socialLinks = [
   {
@@ -73,21 +75,21 @@ export function Hero() {
           </p>
 
           <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <a
+            <Link
               href="/projects"
               className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200"
             >
               프로젝트 보기
-            </a>
-            <a
+            </Link>
+            <Link
               href="/contact"
               className="px-8 py-3 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-white border border-gray-300 dark:border-gray-600 font-medium rounded-lg transition-colors duration-200"
             >
               연락하기
-            </a>
+            </Link>
           </div>
 
-          <div className="flex space-x-6">
+          <div className="flex space-x-6 mb-12">
             {socialLinks.map((item) => (
               <a
                 key={item.name}
@@ -103,9 +105,18 @@ export function Hero() {
           </div>
         </div>
       </div>
-
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
-        <div className="text-gray-400">
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+        <motion.div
+          animate={{
+            y: [0, 10, 0],
+          }}
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            repeatType: "loop",
+          }}
+          className="text-gray-400"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -119,7 +130,7 @@ export function Hero() {
           >
             <path d="M6 9l6 6 6-6" />
           </svg>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
