@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
+import { motion, AnimatePresence } from "framer-motion";
 import { FiSun, FiMoon, FiMenu, FiX } from "react-icons/fi";
 import { useState, useEffect } from "react";
 
@@ -37,95 +38,167 @@ export function Header() {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        {/* 로고 */}
-        <Link href="/" className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-          Wd-70
-        </Link>
+    <motion.header 
+      className="fixed top-0 left-0 right-0 z-50 bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl border-b border-white/20 dark:border-gray-800/50 shadow-lg"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+    >
+      {/* 🌈 그라데이션 테두리 효과 */}
+      <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/10 via-brand-accent/5 to-brand-secondary/10 rounded-b-xl"></div>
+      
+      <div className="container mx-auto px-4 py-4 flex justify-between items-center relative z-10">
+        {/* 🎨 프리미엄 로고 */}
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <Link href="/" className="text-2xl font-bold text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 transition-all duration-300">
+            Wd-70
+          </Link>
+        </motion.div>
 
-        {/* 데스크톱 네비게이션 */}
-        <nav className="hidden md:flex items-center space-x-8">
-          {navItems.map((item) => {
+        {/* 🚀 고급 데스크톱 네비게이션 */}
+        <nav className="hidden md:flex items-center space-x-1">
+          {navItems.map((item, index) => {
             const isActive = item.href === '/' 
               ? pathname === '/' 
               : pathname.startsWith(item.href) && item.href !== '/';
             return (
-              <Link
+              <motion.div
                 key={item.href}
-                href={item.href}
-                className={`transition-colors duration-200 ${
-                  isActive
-                    ? 'text-blue-600 dark:text-blue-400 font-semibold'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
-                }`}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -2 }}
               >
-                {item.name}
-              </Link>
+                <Link
+                  href={item.href}
+                  className={`relative px-4 py-2 rounded-xl transition-all duration-300 group ${
+                    isActive
+                      ? 'text-purple-600 dark:text-purple-400 font-semibold'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400'
+                  }`}
+                >
+                  <span className="relative z-20">{item.name}</span>
+                  {/* 🌊 흐르는 언더라인 효과 */}
+                  <div className={`absolute bottom-0 left-0 h-0.5 bg-purple-600 dark:bg-purple-400 transition-all duration-300 ${
+                    isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}></div>
+                  {/* 글로우 배경 */}
+                  <div className="absolute inset-0 bg-purple-600/10 dark:bg-purple-400/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </Link>
+              </motion.div>
             );
           })}
-          <button
+          
+          {/* 🌟 3D 테마 토글 버튼 */}
+          <motion.button
             onClick={toggleTheme}
-            className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+            className="relative ml-4 p-3 rounded-xl bg-white/20 dark:bg-gray-800/30 backdrop-blur-sm border border-white/30 dark:border-gray-700/50 hover:bg-white/30 dark:hover:bg-gray-700/50 transition-all duration-300"
             aria-label="Toggle theme"
+            whileHover={{ 
+              scale: 1.05,
+              rotateY: 180
+            }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400 }}
           >
-            {theme === "dark" ? <FiSun size={20} /> : <FiMoon size={20} />}
-          </button>
-        </nav>
-
-        {/* 모바일 메뉴 버튼 */}
-        <button
-          className="md:hidden p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-        >
-          {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-        </button>
-      </div>
-
-      {/* 모바일 메뉴 */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
-          <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-            {navItems.map((item) => {
-              const isActive = item.href === '/' 
-                ? pathname === '/' 
-                : pathname.startsWith(item.href) && item.href !== '/';
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`py-2 px-4 rounded-md transition-colors duration-200 ${
-                    isActive
-                      ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-semibold'
-                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              );
-            })}
-            <button
-              onClick={() => {
-                toggleTheme();
-                setIsMenuOpen(false);
-              }}
-              className="flex items-center py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
+            <motion.div
+              initial={false}
+              animate={{ rotateY: theme === "dark" ? 180 : 0 }}
+              transition={{ duration: 0.5 }}
+              style={{ transformStyle: "preserve-3d" }}
             >
               {theme === "dark" ? (
-                <>
-                  <FiSun className="mr-2" /> 라이트 모드로 전환
-                </>
+                <FiSun size={20} className="text-orange-500" />
               ) : (
-                <>
-                  <FiMoon className="mr-2" /> 다크 모드로 전환
-                </>
+                <FiMoon size={20} className="text-purple-600" />
               )}
-            </button>
-          </div>
-        </div>
-      )}
-    </header>
+            </motion.div>
+          </motion.button>
+        </nav>
+
+        {/* 🎯 고급 모바일 메뉴 버튼 */}
+        <motion.button
+          className="md:hidden p-3 rounded-xl bg-white/20 dark:bg-gray-800/30 backdrop-blur-sm border border-white/30 dark:border-gray-700/50 text-purple-600 dark:text-purple-400 hover:bg-white/30 dark:hover:bg-gray-700/50 transition-all duration-300"
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <motion.div
+            animate={{ rotate: isMenuOpen ? 180 : 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+          </motion.div>
+        </motion.button>
+      </div>
+
+      {/* 🌊 개선된 모바일 메뉴 */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div 
+            className="md:hidden bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-t border-white/30 dark:border-gray-700/50"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="container mx-auto px-4 py-6 flex flex-col space-y-2">
+              {navItems.map((item, index) => {
+                const isActive = item.href === '/' 
+                  ? pathname === '/' 
+                  : pathname.startsWith(item.href) && item.href !== '/';
+                return (
+                  <motion.div
+                    key={item.href}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <Link
+                      href={item.href}
+                      className={`relative block py-3 px-4 rounded-xl transition-all duration-300 ${
+                        isActive
+                          ? 'bg-purple-600 text-white font-semibold shadow-lg'
+                          : 'text-gray-700 dark:text-gray-300 hover:bg-purple-600/10 hover:text-purple-600 dark:hover:text-purple-400'
+                      }`}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  </motion.div>
+                );
+              })}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navItems.length * 0.1 }}
+              >
+                <button
+                  onClick={() => {
+                    toggleTheme();
+                    setIsMenuOpen(false);
+                  }}
+                  className="flex items-center w-full py-3 px-4 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-cyan-500/10 hover:text-cyan-600 dark:hover:text-cyan-400 transition-all duration-300"
+                >
+                  {theme === "dark" ? (
+                    <>
+                      <FiSun className="mr-3" size={20} /> 라이트 모드로 전환
+                    </>
+                  ) : (
+                    <>
+                      <FiMoon className="mr-3" size={20} /> 다크 모드로 전환
+                    </>
+                  )}
+                </button>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 }

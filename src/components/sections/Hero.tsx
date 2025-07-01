@@ -31,21 +31,48 @@ const socialLinks = [
 export function Hero() {
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-8">
-      <div className="container mx-auto px-4 py-8">
+      {/* 🌟 새로운 배경 그라데이션 메시 */}
+      <div className="absolute inset-0 bg-brand-primary opacity-5 dark:opacity-10"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-purple-500/10 to-transparent"></div>
+      
+      <div className="container mx-auto px-4 py-8 relative z-10">
         <div className="flex flex-col items-center text-center">
           <div className="mb-8">
-            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 p-1 mb-6 mx-auto">
-              <div className="bg-white dark:bg-gray-900 w-full h-full rounded-full flex items-center justify-center">
-                <span className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            {/* 🎨 혁신적인 3D 아바타 */}
+            <motion.div 
+              className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-brand-primary p-1 mb-6 mx-auto glow-primary hover-glow-primary"
+              whileHover={{ 
+                scale: 1.05,
+                rotateY: 15,
+                rotateX: 5 
+              }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 300, 
+                damping: 20 
+              }}
+              style={{
+                transformStyle: "preserve-3d",
+              }}
+            >
+              <div className="bg-white dark:bg-gray-900 w-full h-full rounded-full flex items-center justify-center relative overflow-hidden">
+                {/* 내부 글로우 효과 */}
+                <div className="absolute inset-0 bg-brand-primary opacity-20 rounded-full blur-xl"></div>
+                <span className="text-4xl font-bold text-brand-primary relative z-10">
                   Wd-70
                 </span>
               </div>
-            </div>
+            </motion.div>
           </div>
 
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
-            안녕하세요, Wd-70입니다
-          </h1>
+          <motion.h1 
+            className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            안녕하세요, <span className="text-brand-primary">Wd-70</span>입니다
+          </motion.h1>
 
           <div className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 h-12">
             <TypeAnimation
@@ -74,37 +101,54 @@ export function Hero() {
             위한 창의적인 솔루션을 찾는 데 열정적입니다.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
+          <motion.div 
+            className="flex flex-wrap justify-center gap-4 mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+          >
+            {/* 🚀 네온 효과 버튼 */}
             <Link
               href="/projects"
-              className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200"
+              className="group relative px-8 py-3 bg-brand-primary text-white font-medium rounded-lg overflow-hidden hover-glow-primary transition-all duration-300 hover:scale-105"
             >
-              프로젝트 보기
+              <span className="relative z-10">프로젝트 보기</span>
+              <div className="absolute inset-0 bg-brand-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </Link>
             <Link
               href="/contact"
-              className="px-8 py-3 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-white border border-gray-300 dark:border-gray-600 font-medium rounded-lg transition-colors duration-200"
+              className="group relative px-8 py-3 bg-white/10 dark:bg-gray-800/50 backdrop-blur-sm hover:bg-white/20 dark:hover:bg-gray-700/70 text-gray-800 dark:text-white border border-white/20 dark:border-gray-600/50 font-medium rounded-lg transition-all duration-300 hover:scale-105 hover-glow-accent"
             >
-              연락하기
+              <span className="relative z-10">연락하기</span>
             </Link>
-          </div>
+          </motion.div>
 
-          <div className="flex space-x-6 mb-12">
-            {socialLinks.map((item) => (
-              <a
+          <motion.div 
+            className="flex space-x-6 mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+          >
+            {socialLinks.map((item, index) => (
+              <motion.a
                 key={item.name}
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors duration-200"
+                className="group relative p-3 rounded-full bg-white/10 dark:bg-gray-800/30 backdrop-blur-sm hover:bg-brand-primary transition-all duration-300 hover:scale-110 hover-glow-primary"
                 aria-label={item.name}
+                whileHover={{ y: -3 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 + index * 0.1 }}
               >
-                <item.icon className="h-6 w-6" />
-              </a>
+                <item.icon className="h-6 w-6 text-gray-500 dark:text-gray-400 group-hover:text-white transition-colors duration-300" />
+              </motion.a>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
+      {/* 🎯 개선된 스크롤 인디케이터 */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
         <motion.div
           animate={{
@@ -115,21 +159,25 @@ export function Hero() {
             repeat: Infinity,
             repeatType: "loop",
           }}
-          className="text-gray-400"
+          className="flex flex-col items-center space-y-2"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M6 9l6 6 6-6" />
-          </svg>
+          <div className="w-1 h-8 bg-gradient-to-b from-transparent via-brand-primary to-transparent rounded-full opacity-60"></div>
+          <div className="p-2 rounded-full bg-brand-primary/20 backdrop-blur-sm">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-brand-primary"
+            >
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </div>
         </motion.div>
       </div>
     </section>

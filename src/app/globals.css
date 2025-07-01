@@ -53,6 +53,26 @@ main:not(.home-page) {
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+    
+    /* 🌈 새로운 브랜드 그라데이션 팔레트 */
+    --brand-primary-start: 238 100% 70%;    /* violet-400 */
+    --brand-primary-middle: 262 83% 58%;    /* purple-500 */
+    --brand-primary-end: 239 84% 67%;       /* indigo-500 */
+    
+    --brand-secondary-start: 20 91% 60%;    /* orange-500 */
+    --brand-secondary-middle: 330 81% 60%;  /* pink-500 */
+    --brand-secondary-end: 0 84% 60%;       /* red-500 */
+    
+    --brand-accent-start: 158 64% 52%;      /* emerald-500 */
+    --brand-accent-end: 189 94% 57%;        /* cyan-500 */
+    
+    --brand-neutral-start: 215 28% 17%;     /* slate-800 */
+    --brand-neutral-end: 220 13% 18%;       /* gray-800 */
+    
+    /* 🎨 특수 효과를 위한 색상 */
+    --glow-primary: 262 83% 58%;            /* purple-500 for glow */
+    --glow-secondary: 330 81% 60%;          /* pink-500 for glow */
+    --glow-accent: 189 94% 57%;             /* cyan-500 for glow */
   }
 
   .dark {
@@ -80,6 +100,26 @@ main:not(.home-page) {
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    
+    /* 🌙 다크모드 브랜드 그라데이션 (더 깊고 진한 색조) */
+    --brand-primary-start: 238 85% 65%;     /* violet-400 darker */
+    --brand-primary-middle: 262 75% 55%;    /* purple-500 darker */
+    --brand-primary-end: 239 75% 62%;       /* indigo-500 darker */
+    
+    --brand-secondary-start: 20 85% 55%;    /* orange-500 darker */
+    --brand-secondary-middle: 330 75% 55%;  /* pink-500 darker */
+    --brand-secondary-end: 0 75% 55%;       /* red-500 darker */
+    
+    --brand-accent-start: 158 55% 45%;      /* emerald-500 darker */
+    --brand-accent-end: 189 85% 50%;        /* cyan-500 darker */
+    
+    --brand-neutral-start: 215 35% 12%;     /* slate-900 */
+    --brand-neutral-end: 220 20% 10%;       /* gray-900 */
+    
+    /* 🌟 다크모드 글로우 효과 (더 생생하게) */
+    --glow-primary: 262 90% 65%;            /* 더 밝은 보라색 글로우 */
+    --glow-secondary: 330 90% 65%;          /* 더 밝은 핑크색 글로우 */
+    --glow-accent: 189 100% 65%;            /* 더 밝은 시안색 글로우 */
   }
 }
 
@@ -193,4 +233,118 @@ main:not(.home-page) {
 
 .animate-slide-right {
   animation: slideRight 0.5s ease-out forwards;
+}
+
+/* 🎨 새로운 브랜드 그라데이션 유틸리티 클래스 */
+@layer utilities {
+  /* 기본 그라데이션 */
+  .bg-brand-primary {
+    background: linear-gradient(135deg, 
+      hsl(var(--brand-primary-start)), 
+      hsl(var(--brand-primary-middle)), 
+      hsl(var(--brand-primary-end))
+    );
+  }
+  
+  .bg-brand-secondary {
+    background: linear-gradient(135deg, 
+      hsl(var(--brand-secondary-start)), 
+      hsl(var(--brand-secondary-middle)), 
+      hsl(var(--brand-secondary-end))
+    );
+  }
+  
+  .bg-brand-accent {
+    background: linear-gradient(135deg, 
+      hsl(var(--brand-accent-start)), 
+      hsl(var(--brand-accent-end))
+    );
+  }
+  
+  .bg-brand-neutral {
+    background: linear-gradient(135deg, 
+      hsl(var(--brand-neutral-start)), 
+      hsl(var(--brand-neutral-end))
+    );
+  }
+  
+  /* 텍스트 그라데이션 */
+  .text-brand-primary {
+    background: linear-gradient(135deg, 
+      hsl(var(--brand-primary-start)), 
+      hsl(var(--brand-primary-middle)), 
+      hsl(var(--brand-primary-end))
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-brand-secondary {
+    background: linear-gradient(135deg, 
+      hsl(var(--brand-secondary-start)), 
+      hsl(var(--brand-secondary-middle)), 
+      hsl(var(--brand-secondary-end))
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-brand-accent {
+    background: linear-gradient(135deg, 
+      hsl(var(--brand-accent-start)), 
+      hsl(var(--brand-accent-end))
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  /* 글로우 효과 */
+  .glow-primary {
+    box-shadow: 
+      0 0 20px hsla(var(--glow-primary), 0.3),
+      0 0 40px hsla(var(--glow-primary), 0.2),
+      0 0 60px hsla(var(--glow-primary), 0.1);
+  }
+  
+  .glow-secondary {
+    box-shadow: 
+      0 0 20px hsla(var(--glow-secondary), 0.3),
+      0 0 40px hsla(var(--glow-secondary), 0.2),
+      0 0 60px hsla(var(--glow-secondary), 0.1);
+  }
+  
+  .glow-accent {
+    box-shadow: 
+      0 0 20px hsla(var(--glow-accent), 0.3),
+      0 0 40px hsla(var(--glow-accent), 0.2),
+      0 0 60px hsla(var(--glow-accent), 0.1);
+  }
+  
+  /* 호버 글로우 효과 */
+  .hover-glow-primary:hover {
+    transition: box-shadow 0.3s ease;
+    box-shadow: 
+      0 0 30px hsla(var(--glow-primary), 0.4),
+      0 0 60px hsla(var(--glow-primary), 0.3),
+      0 0 90px hsla(var(--glow-primary), 0.2);
+  }
+  
+  .hover-glow-secondary:hover {
+    transition: box-shadow 0.3s ease;
+    box-shadow: 
+      0 0 30px hsla(var(--glow-secondary), 0.4),
+      0 0 60px hsla(var(--glow-secondary), 0.3),
+      0 0 90px hsla(var(--glow-secondary), 0.2);
+  }
+  
+  .hover-glow-accent:hover {
+    transition: box-shadow 0.3s ease;
+    box-shadow: 
+      0 0 30px hsla(var(--glow-accent), 0.4),
+      0 0 60px hsla(var(--glow-accent), 0.3),
+      0 0 90px hsla(var(--glow-accent), 0.2);
+  }
 }
