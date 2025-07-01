@@ -86,7 +86,7 @@ export default function AyaukeSongbookDetail() {
         <motion.div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 mb-16" variants={itemVariants}>
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">프로젝트 개요</h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-            HONEYZ 소속 버튜버 아야의 팬을 위해 제작된 종합 정보 플랫폼입니다. 아야가 부른 450여 곡의 노래 데이터를 체계적으로 관리하고, 
+            HONEYZ 소속 버튜버 아야의 팬을 위해 제작된 종합 정보 플랫폼입니다. 아야가 부르는 450여 곡의 노래 데이터를 체계적으로 관리하고, 
             팬들이 쉽게 검색하고 감상할 수 있는 환경을 제공합니다.
           </p>
           <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
@@ -160,7 +160,7 @@ export default function AyaukeSongbookDetail() {
             {[
               '고도화된 다국어 검색 시스템 (한글 초성, 한/영 오타 허용, 띄어쓰기 무관)',
               'Google Sheets ↔ MongoDB 하이브리드 데이터 동기화',
-              'YouTube MR 영상 재생 및 구간 점프 기능',
+              'YouTube MR 영상 재생 기능',
               '반응형 모바일 네비게이션 및 다크 모드 지원',
               '언어별 필터링 및 실시간 검색 결과 카운팅',
               'Virtual scrolling과 chunk 렌더링으로 450+ 곡 데이터 원활 처리'
@@ -180,7 +180,7 @@ export default function AyaukeSongbookDetail() {
             <div className="text-gray-600 dark:text-gray-300">관리 곡 수</div>
           </div>
           <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg text-center">
-            <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">3개월</div>
+            <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">4일</div>
             <div className="text-gray-600 dark:text-gray-300">개발 기간</div>
           </div>
           <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg text-center">
@@ -196,17 +196,27 @@ export default function AyaukeSongbookDetail() {
         {/* Links */}
         <motion.div className="text-center" variants={itemVariants}>
           <div className="flex justify-center gap-6">
-            <button className="flex items-center gap-2 bg-gray-800 dark:bg-gray-700 text-white px-6 py-3 rounded-xl hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors cursor-not-allowed opacity-50">
+            <a 
+              href="https://github.com/Wd-70/AyaUke" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-gray-800 dark:bg-gray-700 text-white px-6 py-3 rounded-xl hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors"
+            >
               <FaGithub className="w-5 h-5" />
-              GitHub (Private)
-            </button>
-            <button className="flex items-center gap-2 bg-purple-600 text-white px-6 py-3 rounded-xl hover:bg-purple-700 transition-colors cursor-not-allowed opacity-50">
+              GitHub
+            </a>
+            <a 
+              href="https://ayauke.vercel.app/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-purple-600 text-white px-6 py-3 rounded-xl hover:bg-purple-700 transition-colors"
+            >
               <FaExternalLinkAlt className="w-5 h-5" />
-              Live Demo (준비중)
-            </button>
+              Live Demo
+            </a>
           </div>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
-            현재 프라이빗 리포지토리이며, 배포 준비 중입니다.
+            실제 사용 가능한 플랫폼입니다. GitHub에서 소스코드를 확인하실 수 있습니다.
           </p>
         </motion.div>
       </div>

@@ -151,31 +151,31 @@ export const projects: Project[] = [
     createdAt: new Date(2024, 2, 10),
     updatedAt: now
   },
-  {
-    id: 'data-pipeline',
-    title: '데이터 파이프라인 자동화',
-    category: 'automation',
-    priceTier: 'deluxe',
-    description: '데이터 수집, 처리, 시각화를 자동화하는 파이프라인 시스템',
-    thumbnail: '/images/projects/unnamed.jpg',
-    tags: ['Python', 'Airflow', 'Docker', 'BigQuery'],
-    gallery: [
-      '/images/projects/unnamed.jpg',
-      '/images/projects/unnamed.jpg'
-    ],
-    techStack: ['Python', 'Apache Airflow', 'Docker', 'Google BigQuery'],
-    details: {
-      overview: '다양한 소스에서 데이터를 수집하여 처리하고 시각화하는 종단간 데이터 파이프라인을 구축했습니다.',
-      features: [
-        '자동화된 데이터 수집',
-        '데이터 변환 및 정제',
-        '에러 처리 및 모니터링',
-        '자동화된 보고서 생성'
-      ]
-    },
-    createdAt: new Date(2023, 11, 5),
-    updatedAt: now
-  },
+  // {
+  //   id: 'data-pipeline',
+  //   title: '데이터 파이프라인 자동화',
+  //   category: 'automation',
+  //   priceTier: 'deluxe',
+  //   description: '데이터 수집, 처리, 시각화를 자동화하는 파이프라인 시스템',
+  //   thumbnail: '/images/projects/unnamed.jpg',
+  //   tags: ['Python', 'Airflow', 'Docker', 'BigQuery'],
+  //   gallery: [
+  //     '/images/projects/unnamed.jpg',
+  //     '/images/projects/unnamed.jpg'
+  //   ],
+  //   techStack: ['Python', 'Apache Airflow', 'Docker', 'Google BigQuery'],
+  //   details: {
+  //     overview: '다양한 소스에서 데이터를 수집하여 처리하고 시각화하는 종단간 데이터 파이프라인을 구축했습니다.',
+  //     features: [
+  //       '자동화된 데이터 수집',
+  //       '데이터 변환 및 정제',
+  //       '에러 처리 및 모니터링',
+  //       '자동화된 보고서 생성'
+  //     ]
+  //   },
+  //   createdAt: new Date(2023, 11, 5),
+  //   updatedAt: now
+  // },
   {
     id: 'ayauke-songbook-platform',
     title: '아야 팬페이지 - 노래책 플랫폼',
