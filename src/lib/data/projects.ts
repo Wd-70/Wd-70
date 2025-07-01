@@ -1,7 +1,7 @@
 const now = new Date();
 
 export type ProjectCategory = 'mobile' | 'web' | 'automation';
-export type PriceTier = 'standard' | 'deluxe' | 'premium';
+export type PriceTier = 'standard' | 'deluxe' | 'deluxe-plus' | 'premium';
 
 export interface Project {
   id: string;
@@ -180,15 +180,16 @@ export const projects: Project[] = [
     id: 'ayauke-songbook-platform',
     title: '아야 팬페이지 - 노래책 플랫폼',
     category: 'web',
-    priceTier: 'premium',
+    priceTier: 'deluxe-plus',
     description: '버튜버 아야의 노래 데이터베이스와 실시간 스트리밍 정보를 제공하는 팬 커뮤니티 플랫폼',
-    thumbnail: '/images/projects/ayauke-thumbnail.png',
+    thumbnail: '/images/projects/ayauke-homepage.png',
     tags: ['Next.js', 'TypeScript', 'MongoDB', 'Google Sheets API', 'YouTube API'],
     gallery: [
-      '/images/projects/ayauke-homepage.png',
       '/images/projects/ayauke-songbook.png',
-      '/images/projects/ayauke-search-demo.gif',
-      '/images/projects/ayauke-mobile.png',
+      '/images/projects/ayauke-lyric.png',
+      '/images/projects/ayauke-mr.png',
+      '/images/projects/ayauke-cover.png',
+      '/images/projects/ayauke-mobile.jpg',
       '/images/projects/ayauke-dark-mode.png'
     ],
     techStack: [

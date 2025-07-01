@@ -14,7 +14,7 @@ export const viewport: Viewport = {
 
 // 메타데이터 설정
 export const metadata: Metadata = {
-  metadataBase: new URL('https://yourdomain.com'), // 실제 도메인으로 변경
+  metadataBase: new URL('https://wd-70.vercel.app'),
   title: "Wd-70 | 개발자 포트폴리오",
   description: "Wd-70의 개발 블로그 및 포트폴리오 사이트입니다. Flutter, Next.js, Python을 활용한 프로젝트를 소개합니다.",
   keywords: ["개발자 포트폴리오", "Wd-70", "Next.js", "Flutter", "Python", "웹 개발"],

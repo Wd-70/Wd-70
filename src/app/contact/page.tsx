@@ -40,12 +40,12 @@ export default function ContactPage() {
                   <div>
                     <p className="text-sm text-blue-100">GitHub</p>
                     <a 
-                      href="https://github.com/yourusername" 
+                      href="https://github.com/Wd-70" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="hover:underline"
                     >
-                      github.com/yourusername
+                      github.com/Wd-70
                     </a>
                   </div>
                 </div>
@@ -55,7 +55,7 @@ export default function ContactPage() {
                 <h3 className="text-lg font-semibold mb-4">소셜 미디어</h3>
                 <div className="flex space-x-4">
                   <a 
-                    href="https://github.com/yourusername" 
+                    href="https://github.com/Wd-70" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="p-2 bg-white/20 rounded-full hover:bg-white/30 transition-colors"
@@ -63,7 +63,7 @@ export default function ContactPage() {
                   >
                     <FiGithub className="h-5 w-5" />
                   </a>
-                  <a 
+                  {/* <a 
                     href="https://linkedin.com/in/yourusername" 
                     target="_blank" 
                     rel="noopener noreferrer"
@@ -71,7 +71,7 @@ export default function ContactPage() {
                     aria-label="LinkedIn"
                   >
                     <FiLinkedin className="h-5 w-5" />
-                  </a>
+                  </a> */}
                 </div>
               </div>
             </div>

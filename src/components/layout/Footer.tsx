@@ -4,19 +4,19 @@ import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 const socialLinks = [
   {
     name: "GitHub",
-    href: "https://github.com/yourusername",
+    href: "https://github.com/Wd-70",
     icon: FaGithub,
   },
-  {
-    name: "Twitter",
-    href: "https://twitter.com/yourusername",
-    icon: FaTwitter,
-  },
-  {
-    name: "LinkedIn",
-    href: "https://linkedin.com/in/yourusername",
-    icon: FaLinkedin,
-  },
+  // {
+  //   name: "Twitter",
+  //   href: "https://twitter.com/yourusername",
+  //   icon: FaTwitter,
+  // },
+  // {
+  //   name: "LinkedIn",
+  //   href: "https://linkedin.com/in/yourusername",
+  //   icon: FaLinkedin,
+  // },
 ];
 
 export function Footer() {
@@ -27,7 +27,7 @@ export function Footer() {
           <div className="mb-6 md:mb-0">
             <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">Wd-70</h2>
             <p className="text-gray-600 dark:text-gray-400">
-              개발자 포트폴리오 & 블로그
+              개발자 포트폴리오
             </p>
           </div>
 

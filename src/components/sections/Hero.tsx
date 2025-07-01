@@ -8,19 +8,19 @@ import Link from "next/link";
 const socialLinks = [
   {
     name: "GitHub",
-    href: "https://github.com/yourusername",
+    href: "https://github.com/Wd-70",
     icon: FiGithub,
   },
-  {
-    name: "Twitter",
-    href: "https://twitter.com/yourusername",
-    icon: FiTwitter,
-  },
-  {
-    name: "LinkedIn",
-    href: "https://linkedin.com/in/yourusername",
-    icon: FiLinkedin,
-  },
+  // {
+  //   name: "Twitter",
+  //   href: "https://x.com/KeNN7052",
+  //   icon: FiTwitter,
+  // },
+  // {
+  //   name: "LinkedIn",
+  //   href: "https://linkedin.com/in/yourusername",
+  //   icon: FiLinkedin,
+  // },
   {
     name: "Email",
     href: "mailto:kjk7052@gmail.com",
