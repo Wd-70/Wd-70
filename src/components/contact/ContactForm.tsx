@@ -65,110 +65,153 @@ export function ContactForm() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.1 }}
-      className="w-full max-w-2xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg"
+      transition={{ duration: 0.6 }}
+      className="w-full"
     >
-      <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-        연락하기
-      </h2>
-      
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FiUser className="h-5 w-5 text-gray-400" />
+        <motion.div
+          whileHover={{ y: -2 }}
+          transition={{ type: "spring", stiffness: 400 }}
+        >
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            이름
+          </label>
+          <div className="relative group">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <FiUser className="h-5 w-5 text-gray-400 group-hover:text-brand-primary transition-colors" />
             </div>
             <Input
-              placeholder="닉네임"
-              className="pl-10"
+              placeholder="닉네임을 입력해주세요"
+              className="pl-12 h-12 bg-white/80 dark:bg-gray-700/80 border-gray-200 dark:border-gray-600 focus:border-brand-primary dark:focus:border-brand-primary focus:ring-brand-primary/20 transition-all duration-200"
               disabled={isSubmitting}
               {...register('name')}
             />
           </div>
           {errors.name && (
-            <p className="mt-1 text-sm text-red-500">
+            <motion.p 
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-2 text-sm text-red-500 flex items-center gap-1"
+            >
+              <span>⚠️</span>
               {errors.name.message}
-            </p>
+            </motion.p>
           )}
-        </div>
+        </motion.div>
 
-        <div>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FiMail className="h-5 w-5 text-gray-400" />
+        <motion.div
+          whileHover={{ y: -2 }}
+          transition={{ type: "spring", stiffness: 400 }}
+        >
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            이메일
+          </label>
+          <div className="relative group">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <FiMail className="h-5 w-5 text-gray-400 group-hover:text-brand-secondary transition-colors" />
             </div>
             <Input
               type="email"
-              placeholder="이메일"
-              className="pl-10"
+              placeholder="이메일 주소를 입력해주세요"
+              className="pl-12 h-12 bg-white/80 dark:bg-gray-700/80 border-gray-200 dark:border-gray-600 focus:border-brand-secondary dark:focus:border-brand-secondary focus:ring-brand-secondary/20 transition-all duration-200"
               disabled={isSubmitting}
               {...register('email')}
             />
           </div>
           {errors.email && (
-            <p className="mt-1 text-sm text-red-500">
+            <motion.p 
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-2 text-sm text-red-500 flex items-center gap-1"
+            >
+              <span>⚠️</span>
               {errors.email.message}
-            </p>
+            </motion.p>
           )}
-        </div>
+        </motion.div>
 
-        <div>
-          <div className="relative">
-            <div className="absolute top-3 left-3">
-              <FiMessageSquare className="h-5 w-5 text-gray-400" />
+        <motion.div
+          whileHover={{ y: -2 }}
+          transition={{ type: "spring", stiffness: 400 }}
+        >
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            메시지
+          </label>
+          <div className="relative group">
+            <div className="absolute top-4 left-4">
+              <FiMessageSquare className="h-5 w-5 text-gray-400 group-hover:text-brand-accent transition-colors" />
             </div>
             <Textarea
-              placeholder="메시지를 입력해 주세요"
-              className="min-h-[150px] pl-10"
+              placeholder="프로젝트에 대한 아이디어나 협업 제안을 자유롭게 공유해주세요..."
+              className="min-h-[150px] pl-12 pt-4 bg-white/80 dark:bg-gray-700/80 border-gray-200 dark:border-gray-600 focus:border-brand-accent dark:focus:border-brand-accent focus:ring-brand-accent/20 transition-all duration-200 resize-none"
               disabled={isSubmitting}
               {...register('message')}
             />
           </div>
           {errors.message && (
-            <p className="mt-1 text-sm text-red-500">
+            <motion.p 
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-2 text-sm text-red-500 flex items-center gap-1"
+            >
+              <span>⚠️</span>
               {errors.message.message}
-            </p>
+            </motion.p>
           )}
-        </div>
+        </motion.div>
 
-        <div className="flex justify-end">
+        <motion.div 
+          className="pt-4"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="gap-2"
+            className="w-full h-12 bg-brand-primary hover:bg-brand-primary/90 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 gap-3 group relative overflow-hidden"
           >
-            {isSubmitting ? (
-              <>
-                <svg
-                  className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  ></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  ></path>
-                </svg>
-                전송 중...
-              </>
-            ) : (
-              <>
-                <FiSend className="h-4 w-4" />
-                메시지 보내기
-              </>
-            )}
+            {/* 배경 애니메이션 */}
+            <motion.div
+              className="absolute inset-0 bg-brand-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              whileHover={{ scale: 1.05 }}
+            />
+            
+            <div className="relative z-10 flex items-center gap-3">
+              {isSubmitting ? (
+                <>
+                  <motion.svg
+                    className="h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </motion.svg>
+                  전송 중...
+                </>
+              ) : (
+                <>
+                  <FiSend className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  메시지 보내기
+                </>
+              )}
+            </div>
           </Button>
-        </div>
+        </motion.div>
       </form>
     </motion.div>
   );
