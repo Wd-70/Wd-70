@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
+import { motion } from 'framer-motion';
 import { projects as projectsData } from '@/lib/data/projects';
 import { ProjectCard } from '@/components/projects/ProjectCard';
 import { Tabs, TabsList, TabsTrigger } from '../../components/ui/tabs';
@@ -64,6 +65,19 @@ export default function ProjectsClient({ initialCategory = 'mobile' }: ProjectsC
       setActiveCategory(categoryFromPath as ProjectCategory);
     }
   }, [pathname]);
+
+  // 브라우저 뒤로가기/앞으로가기 지원
+  useEffect(() => {
+    const handlePopState = () => {
+      const categoryFromPath = window.location.pathname.split('/').pop();
+      if (categoryFromPath && ['mobile', 'web', 'automation'].includes(categoryFromPath)) {
+        setActiveCategory(categoryFromPath as ProjectCategory);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   // 프로젝트 데이터 로드 및 처리
   useEffect(() => {
@@ -129,8 +143,9 @@ export default function ProjectsClient({ initialCategory = 'mobile' }: ProjectsC
 
   const handleTabChange = (value: string) => {
     const category = value as ProjectCategory;
-    // URL 업데이트 (리렌더링 방지를 위해 push 대신 replace 사용)
-    router.replace(`/projects/${category}`, { scroll: false });
+    setActiveCategory(category);
+    // URL을 히스토리에 추가하지만 페이지 리로드 방지
+    window.history.pushState(null, '', `/projects/${category}`);
   };
 
   // 카테고리별로 프로젝트 필터링
@@ -164,13 +179,44 @@ export default function ProjectsClient({ initialCategory = 'mobile' }: ProjectsC
   }
 
   return (
-    <main className="container py-12">
-      <div className="mb-12 text-center">
-        <h1 className="text-4xl font-bold mb-4">프로젝트</h1>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
-          제공하는 서비스와 프로젝트를 소개합니다. 각 카테고리를 선택하여 확인해보세요.
-        </p>
-      </div>
+    <main className="min-h-screen relative overflow-hidden">
+      {/* 🌟 프리미엄 배경 그라데이션 */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-900/20 dark:via-indigo-900/20 dark:to-purple-900/20"></div>
+      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-cyan-500/10 to-transparent"></div>
+      
+      <div className="container py-20 relative z-10">
+        <motion.div 
+          className="mb-16 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          {/* 🎯 3D 프로젝트 아이콘 */}
+          <motion.div
+            className="w-20 h-20 mx-auto mb-8 rounded-full bg-brand-primary p-1 glow-primary"
+            whileHover={{ 
+              scale: 1.1,
+              rotateY: 15,
+              rotateX: 5 
+            }}
+            transition={{ type: "spring", stiffness: 300 }}
+            style={{ transformStyle: "preserve-3d" }}
+          >
+            <div className="bg-white dark:bg-gray-900 w-full h-full rounded-full flex items-center justify-center relative overflow-hidden">
+              <div className="absolute inset-0 bg-brand-primary opacity-20 rounded-full blur-xl"></div>
+              <svg className="w-8 h-8 text-brand-primary relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              </svg>
+            </div>
+          </motion.div>
+
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            <span style={{ color: 'hsl(var(--brand-primary-middle))' }}>프로젝트</span>
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            다양한 분야의 혁신적인 프로젝트들을 확인해보세요. AI와 함께 만들어낸 차별화된 솔루션입니다.
+          </p>
+        </motion.div>
       
       {/* 디버그 정보 섹션 */}
       {_DEBUG_ && (
@@ -220,32 +266,168 @@ export default function ProjectsClient({ initialCategory = 'mobile' }: ProjectsC
       </div>
       )}
       
-      {/* 카테고리 탭 */}
-      <div className="mb-8">
-        <Tabs 
-          value={activeCategory}
-          onValueChange={handleTabChange}
-          className="w-full"
+        {/* 🎨 프리미엄 카테고리 탭 */}
+        <motion.div 
+          className="mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
         >
-          <TabsList className="grid w-full grid-cols-3 mb-6">
-            {CATEGORIES.map((category) => (
-              <TabsTrigger 
-                key={category.id} 
-                value={category.id}
-                className={`px-6 py-2 ${activeCategory === category.id ? 'bg-blue-100 text-blue-800' : ''}`}
-              >
-                {category.label}
-              </TabsTrigger>
-            ))}
-          </TabsList>
+            <div className="relative max-w-2xl mx-auto mb-12">
+              <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/50 dark:border-gray-700/50 rounded-2xl p-2 shadow-lg">
+                <div className="flex">
+                  {CATEGORIES.map((category, index) => (
+                    <motion.button
+                      key={category.id}
+                      onClick={() => handleTabChange(category.id)}
+                      className={`
+                        flex-1 relative px-6 py-3 rounded-xl font-semibold transition-all duration-300 text-center
+                        ${activeCategory === category.id 
+                          ? 'text-white' 
+                          : 'text-gray-600 dark:text-gray-300 hover:text-brand-primary hover:bg-brand-primary/5'
+                        }
+                      `}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <span className="relative z-20">{category.label}</span>
+                    </motion.button>
+                  ))}
+                </div>
+                
+                {/* 활성 탭 배경 애니메이션 */}
+                <motion.div
+                  className="absolute top-2 bottom-2 bg-brand-primary rounded-xl shadow-lg z-10"
+                  animate={{
+                    left: `calc(${CATEGORIES.findIndex(cat => cat.id === activeCategory) * 33}% + 7px)`,
+                    width: 'calc(33% - 7px)',
+                  }}
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                />
+              </div>
+            </div>
 
-          {/* 프로젝트 목록 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
+            {/* 🚀 프로젝트 통계 카드 */}
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+            >
+              <motion.div 
+                className="group relative p-6 rounded-xl bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm border border-white/30 dark:border-gray-700/30 hover-glow-primary text-center"
+                whileHover={{ y: -3, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                <div className="absolute inset-0 bg-brand-primary opacity-5 rounded-xl group-hover:opacity-10 transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <h3 className="text-2xl font-bold text-brand-primary mb-1">{filteredProjects.length}</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">
+                    {CATEGORIES.find(c => c.id === activeCategory)?.label} 프로젝트
+                  </p>
+                </div>
+              </motion.div>
+              
+              <motion.div 
+                className="group relative p-6 rounded-xl bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm border border-white/30 dark:border-gray-700/30 hover-glow-secondary text-center"
+                whileHover={{ y: -3, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                <div className="absolute inset-0 bg-brand-secondary opacity-5 rounded-xl group-hover:opacity-10 transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <h3 className="text-2xl font-bold text-brand-secondary mb-1">{projects.length}</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">전체 프로젝트</p>
+                </div>
+              </motion.div>
+              
+              <motion.div 
+                className="group relative p-6 rounded-xl bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm border border-white/30 dark:border-gray-700/30 hover-glow-accent text-center"
+                whileHover={{ y: -3, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                <div className="absolute inset-0 bg-brand-accent opacity-5 rounded-xl group-hover:opacity-10 transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <h3 className="text-2xl font-bold text-brand-accent mb-1">3</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">카테고리</p>
+                </div>
+              </motion.div>
+            </motion.div>
+
+            {/* 🎯 프로젝트 그리드 */}
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.7, duration: 0.6 }}
+            >
+              {filteredProjects.map((project, index) => (
+                <motion.div
+                  key={project.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
+                >
+                  <ProjectCard project={project} />
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* 빈 상태 메시지 */}
+            {filteredProjects.length === 0 && (
+              <motion.div 
+                className="text-center py-16"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5 }}
+              >
+                <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-600 dark:text-gray-300 mb-2">
+                  아직 {CATEGORIES.find(c => c.id === activeCategory)?.label} 프로젝트가 없습니다
+                </h3>
+                <p className="text-gray-500 dark:text-gray-400">
+                  곧 새로운 프로젝트가 추가될 예정입니다
+                </p>
+              </motion.div>
+            )}
+        </motion.div>
+
+        {/* 🎯 하단 Call to Action */}
+        <motion.div 
+          className="text-center mt-20"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1, duration: 0.6 }}
+        >
+          <div className="relative p-8 rounded-2xl bg-brand-primary/10 backdrop-blur-sm border border-brand-primary/20 max-w-4xl mx-auto">
+            <div className="absolute inset-0 bg-brand-primary opacity-5 rounded-2xl"></div>
+            <motion.div
+              className="relative z-10"
+              whileHover={{ scale: 1.02 }}
+            >
+              <h3 className="text-2xl font-bold mb-4" style={{ color: 'hsl(var(--brand-primary-middle))' }}>
+                프로젝트 문의하기
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-6">
+                비슷한 프로젝트가 필요하시거나 새로운 아이디어가 있으시다면 언제든지 연락주세요
+              </p>
+              <motion.a
+                href="/contact"
+                className="inline-flex items-center px-6 py-3 bg-brand-primary text-white font-semibold rounded-xl hover:bg-brand-secondary transition-all duration-300 shadow-lg hover:shadow-xl"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                문의하기
+                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </motion.a>
+            </motion.div>
           </div>
-        </Tabs>
+        </motion.div>
       </div>
     </main>
   );
