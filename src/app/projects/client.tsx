@@ -267,12 +267,7 @@ export default function ProjectsClient({ initialCategory = 'mobile' }: ProjectsC
       )}
       
         {/* 🎨 프리미엄 카테고리 탭 */}
-        <motion.div 
-          className="mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-        >
+        <div className="mb-12">
             <div className="relative max-w-2xl mx-auto mb-12">
               <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/50 dark:border-gray-700/50 rounded-2xl p-2 shadow-lg">
                 <div className="flex">
@@ -308,12 +303,7 @@ export default function ProjectsClient({ initialCategory = 'mobile' }: ProjectsC
             </div>
 
             {/* 🚀 프로젝트 통계 카드 */}
-            <motion.div 
-              className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-            >
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
               <motion.div 
                 className="group relative p-6 rounded-xl bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm border border-white/30 dark:border-gray-700/30 hover-glow-primary text-center"
                 whileHover={{ y: -3, scale: 1.02 }}
@@ -321,7 +311,15 @@ export default function ProjectsClient({ initialCategory = 'mobile' }: ProjectsC
               >
                 <div className="absolute inset-0 bg-brand-primary opacity-5 rounded-xl group-hover:opacity-10 transition-opacity duration-300"></div>
                 <div className="relative z-10">
-                  <h3 className="text-2xl font-bold text-brand-primary mb-1">{filteredProjects.length}</h3>
+                  <motion.h3 
+                    className="text-2xl font-bold text-brand-primary mb-1"
+                    key={`${activeCategory}-count`}
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                  >
+                    {filteredProjects.length}
+                  </motion.h3>
                   <p className="text-sm text-gray-600 dark:text-gray-300">
                     {CATEGORIES.find(c => c.id === activeCategory)?.label} 프로젝트
                   </p>
@@ -351,26 +349,29 @@ export default function ProjectsClient({ initialCategory = 'mobile' }: ProjectsC
                   <p className="text-sm text-gray-600 dark:text-gray-300">카테고리</p>
                 </div>
               </motion.div>
-            </motion.div>
+            </div>
 
             {/* 🎯 프로젝트 그리드 */}
-            <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.7, duration: 0.6 }}
-            >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProjects.map((project, index) => (
                 <motion.div
-                  key={project.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
+                  key={`${activeCategory}-${project.id}`}
+                  initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -20, scale: 0.9 }}
+                  transition={{ 
+                    delay: index * 0.05, 
+                    duration: 0.3,
+                    type: "spring",
+                    stiffness: 400,
+                    damping: 25
+                  }}
+                  layout
                 >
                   <ProjectCard project={project} />
                 </motion.div>
               ))}
-            </motion.div>
+            </div>
 
             {/* 빈 상태 메시지 */}
             {filteredProjects.length === 0 && (
@@ -393,15 +394,10 @@ export default function ProjectsClient({ initialCategory = 'mobile' }: ProjectsC
                 </p>
               </motion.div>
             )}
-        </motion.div>
+        </div>
 
         {/* 🎯 하단 Call to Action */}
-        <motion.div 
-          className="text-center mt-20"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.6 }}
-        >
+        <div className="text-center mt-20">
           <div className="relative p-8 rounded-2xl bg-brand-primary/10 backdrop-blur-sm border border-brand-primary/20 max-w-4xl mx-auto">
             <div className="absolute inset-0 bg-brand-primary opacity-5 rounded-2xl"></div>
             <motion.div
@@ -427,7 +423,7 @@ export default function ProjectsClient({ initialCategory = 'mobile' }: ProjectsC
               </motion.a>
             </motion.div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </main>
   );
