@@ -72,6 +72,16 @@ const projectDetailComponents = {
       loading: () => <Skeleton className="w-full h-96" />,
       ssr: false
     }
+  ),
+  'portfolio-site': dynamic<{
+    project: Project;
+    onImageClick?: (index: number) => void;
+  }>(
+    () => import('@/app/projects/detail/components/portfolio-site/PortfolioSiteDetail'),
+    {
+      loading: () => <Skeleton className="w-full h-96" />,
+      ssr: false
+    }
   )
 } as const;
 
@@ -164,7 +174,7 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
       >
         <div className="container mx-auto px-4 py-12 max-w-6xl">
           <Button asChild variant="ghost" className="mb-6">
-            <Link href="/projects" className="flex items-center gap-2">
+            <Link href={`/projects/${project.category}`} className="flex items-center gap-2">
               <ArrowLeft className="h-4 w-4" />
               프로젝트 목록으로 돌아가기
             </Link>

@@ -51,7 +51,6 @@ export const projects: Project[] = [
       "overview": "포모도로 기법을 활용한 생산성 향상 타이머 앱으로, 사용자가 집중 시간과 휴식 시간을 효과적으로 관리할 수 있도록 도와줍니다. Material Design 3를 기반으로 한 현대적이고 직관적인 UI를 제공합니다.",
       "features": [
         "작업 시간(25분)과 휴식 시간(5분/15분) 타이머",
-        "작업 세션 추적 및 통계",
         "시각적 진행 표시기",
         "완료 시 사운드 알림",
         "다크 모드 지원",
@@ -127,29 +126,65 @@ export const projects: Project[] = [
   },
   {
     id: 'portfolio-site',
-    title: '포트폴리오 웹사이트',
+    title: 'AI 바이브 개발자 포트폴리오',
     category: 'web',
-    priceTier: 'standard',
-    description: '개발자 포트폴리오를 위한 반응형 웹사이트',
-    thumbnail: '/images/projects/unnamed.jpg',
-    tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    priceTier: 'deluxe',
+    description: 'Next.js 15와 Framer Motion을 활용한 프리미엄 개발자 포트폴리오. 3D 애니메이션과 글라스모피즘 효과로 몰입감 있는 사용자 경험 제공',
+    thumbnail: '/images/projects/portfolio-main.png',
+    tags: ['Next.js 15', 'TypeScript', 'Framer Motion', 'Tailwind CSS', '3D Effects'],
     gallery: [
-      '/images/projects/unnamed.jpg',
-      '/images/projects/unnamed.jpg',
-      '/images/projects/unnamed.jpg'
+      '/images/projects/portfolio-main.png',
+      '/images/projects/portfolio-about.png',
+      '/images/projects/portfolio-projects.png',
+      '/images/projects/portfolio-contact.png',
+      '/images/projects/portfolio-mobile.png',
+      '/images/projects/portfolio-dark.png'
     ],
-    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    techStack: [
+      'Next.js 15 (App Router)',
+      'React 19',
+      'TypeScript',
+      'Tailwind CSS',
+      'Framer Motion',
+      'Zod',
+      'Sonner',
+      'React Type Animation',
+      'Nodemailer'
+    ],
     details: {
-      overview: '개발자의 프로젝트와 기술 스택을 보여주는 모던한 포트폴리오 웹사이트입니다.',
+      overview: '현재 보고 계신 이 포트폴리오 웹사이트입니다! AI 바이브 코딩으로 제작된 프리미엄 개발자 포트폴리오로, Next.js 15의 App Router와 Framer Motion을 활용한 고급 애니메이션 효과를 구현했습니다. 전체적으로 글라스모피즘 디자인과 3D 변형 효과를 적용하여 시각적으로 인상적인 사용자 경험을 제공합니다.',
       features: [
-        '반응형 디자인',
-        '다크 모드 지원',
-        '프로젝트 필터링',
-        '애니메이션 효과'
+        '프리미엄 글라스모피즘 디자인 시스템',
+        '3D 호버 애니메이션 및 변형 효과',
+        'Next.js 15 App Router 기반 최적화된 라우팅',
+        'Next Themes를 활용한 완벽한 다크/라이트 모드',
+        '완전 반응형 모바일 퍼스트 디자인',
+        'Framer Motion 기반 부드러운 페이지 전환',
+        'React Hook Form + Zod 검증 연락 폼',
+        'React Type Animation으로 동적 타이핑 효과',
+        'React Swipeable 기반 이미지 갤러리',
+        'Nodemailer 이메일 전송 시스템'
+      ],
+      challenges: [
+        {
+          title: '3D 애니메이션 성능 최적화',
+          description: 'Framer Motion의 3D 변형 효과가 많은 컴포넌트에서 동시 실행될 때 성능 저하 발생',
+          solution: 'transform-style: preserve-3d 최적화와 애니메이션 지연 시간 조정으로 부드러운 성능 확보'
+        },
+        {
+          title: '글라스모피즘 크로스 브라우저 호환성',
+          description: 'backdrop-blur 효과의 브라우저별 지원 차이와 성능 문제',
+          solution: 'CSS fallback과 progressive enhancement로 모든 브라우저에서 일관된 경험 제공'
+        },
+        {
+          title: '다크모드 플래시 현상 (FOUC)',
+          description: '페이지 로드 시 다크/라이트 모드 전환 중 깜빡임 현상 발생',
+          solution: 'next-themes와 CSS visibility 조합으로 완벽한 FOUC 방지 구현'
+        }
       ]
     },
-    createdAt: new Date(2024, 2, 10),
-    updatedAt: now
+    createdAt: new Date(2024, 11, 1), // 2024년 12월
+    updatedAt: new Date(2025, 0, 2)   // 2025년 1월 (현재)
   },
   // {
   //   id: 'data-pipeline',
