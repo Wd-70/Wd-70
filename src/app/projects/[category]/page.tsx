@@ -8,13 +8,13 @@ type CategoryParams = {
 };
 
 type Props = {
-  params: CategoryParams;
+  params: Promise<CategoryParams>;
 };
 
 // 카테고리별 메타데이터 생성
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // params를 비동기적으로 처리
-  const { category } = await Promise.resolve(params);
+  const { category } = await params;
   
   const categoryName = {
     mobile: '모바일 앱',
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 // 카테고리별 프로젝트 페이지
 export default async function CategoryProjectsPage({ params }: Props) {
   // params를 비동기적으로 처리
-  const { category } = await Promise.resolve(params);
+  const { category } = await params;
   
   // 유효한 카테고리인지 확인
   const validCategories: ProjectCategory[] = ['mobile', 'web', 'automation'];
