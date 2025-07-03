@@ -7,9 +7,9 @@ function getProject(id: string) {
   return projects.find((p) => p.id === id);
 }
 
-export default async function ProjectPage({ params }: { params: { slug: string } }) {
+export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   // params를 비동기적으로 처리
-  const { slug } = await Promise.resolve(params);
+  const { slug } = await params;
   const project = getProject(slug);
 
   if (!project) {
@@ -29,9 +29,9 @@ export async function generateStaticParams() {
 }
 
 // 메타데이터 생성
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   // params를 비동기적으로 처리
-  const { slug } = await Promise.resolve(params);
+  const { slug } = await params;
   const project = projects.find((p) => p.id === slug);
 
   if (!project) {
