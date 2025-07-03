@@ -19,8 +19,8 @@ export const ImageGallery = ({ images, initialIndex = 0, onClose }: ImageGallery
   // 스크롤 이벤트 핸들러
   const handleScroll = useCallback(() => {
     if (headerRef.current) {
-      const scrollPosition = window.scrollY || document.documentElement.scrollTop;
-      setScrollY(Math.min(scrollPosition, 100)); // 최대 100px까지 늘어나도록 제한
+      // const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+      // setScrollY(Math.min(scrollPosition, 100)); // 최대 100px까지 늘어나도록 제한
     }
   }, []);
 
