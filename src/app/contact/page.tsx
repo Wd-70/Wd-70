@@ -27,7 +27,7 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="min-h-screen relative overflow-hidden">
+    <main className="pt-20 relative overflow-hidden">
       {/* 🌟 프리미엄 배경 그라데이션 */}
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-900/20 dark:via-purple-900/20 dark:to-pink-900/20"></div>
       <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-orange-500/10 to-transparent"></div>

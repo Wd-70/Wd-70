@@ -61,16 +61,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
   const tierInfo = getTierInfo(project.priceTier || 'standard');
 
-  // Handle project click to prevent animation on category change
+  // Handle project click with smooth navigation
   const handleProjectClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (pathname?.startsWith('/projects/')) {
-      e.preventDefault();
-      window.scrollTo(0, 0);
-      // Add slight delay for animation to complete
-      setTimeout(() => {
-        window.location.href = `/projects/detail/${project.id}`;
-      }, 100);
-    }
+    // Let Next.js handle the navigation naturally without forcing scroll to top
   };
 
   return (

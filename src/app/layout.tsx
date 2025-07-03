@@ -100,7 +100,7 @@ export default function RootLayout({
         <ThemeProvider>
           <PageTransition>
             <Header />
-            <main className="min-h-screen w-full">
+            <main className="w-full">
               {children}
             </main>
             <Footer />

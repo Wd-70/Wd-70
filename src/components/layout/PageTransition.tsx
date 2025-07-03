@@ -71,7 +71,7 @@ export function PageTransition({ children }: PageTransitionProps) {
           initial="hidden"
           animate="visible"
           variants={contentVariants}
-          className="min-h-[calc(100vh-4rem)] w-full pt-4"  // 헤더 높이만큼 상단 여백 조정
+          className="w-full pt-4"  // 헤더 높이만큼 상단 여백 조정
         >
           {rest}
         </motion.div>
@@ -86,7 +86,7 @@ export function PageTransition({ children }: PageTransitionProps) {
       initial="hidden"
       animate="visible"
       variants={contentVariants}
-      className="min-h-[calc(100vh-4rem)] w-full pt-4"  // 헤더가 없는 경우에도 동일한 여백 적용
+      className="w-full pt-4"  // 헤더가 없는 경우에도 동일한 여백 적용
     >
       {children}
     </motion.div>

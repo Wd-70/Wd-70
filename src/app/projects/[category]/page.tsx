@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import ProjectsClient from '../client';
 
 type CategoryParams = {
-  category: 'mobile' | 'web' | 'automation';
+  category: 'mobile' | 'web' | 'extention';
 };
 
 type Props = {
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const categoryName = {
     mobile: '모바일 앱',
     web: '웹사이트',
-    automation: '업무 자동화'
+    extention: '크롬 익스텐션'
   }[category] || '프로젝트';
 
   return {
@@ -36,7 +36,7 @@ export default async function CategoryProjectsPage({ params }: Props) {
   const { category } = await Promise.resolve(params);
   
   // 유효한 카테고리인지 확인
-  const validCategories = ['mobile', 'web', 'automation'];
+  const validCategories = ['mobile', 'web', 'extention'];
   if (!validCategories.includes(category)) {
     notFound();
   }
@@ -49,7 +49,7 @@ export async function generateStaticParams() {
   return [
     { category: 'mobile' },
     { category: 'web' },
-    { category: 'automation' },
+    { category: 'extention' },
   ];
 }
 

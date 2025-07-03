@@ -27,19 +27,12 @@ export const ImageGallery = ({ images, initialIndex = 0, onClose }: ImageGallery
 
   // 모달이 열릴 때 body 스크롤 방지 및 스크롤 위치 저장
   useEffect(() => {
-    // 현재 스크롤 위치 저장 및 body에 스타일 적용
+    // 현재 스크롤 위치 저장
     const savedScrollY = window.scrollY;
-    // 스크롤 위치에 따라 초기 높이 설정
-    setScrollY(savedScrollY);
+    setScrollY(0); // 모달에서는 스크롤 위치 무시
     
-    // body에 스타일 적용 (스크롤 방지)
+    // body에 스타일 적용 (스크롤 방지, 위치는 고정하지 않음)
     document.body.style.overflow = 'hidden';
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${savedScrollY}px`;
-    document.body.style.left = '0';
-    document.body.style.right = '0';
-    document.body.style.width = '100%';
-    document.body.style.height = '100%';
     
     // 스크롤 이벤트 리스너 추가
     window.addEventListener('scroll', handleScroll);
@@ -51,19 +44,7 @@ export const ImageGallery = ({ images, initialIndex = 0, onClose }: ImageGallery
       window.removeEventListener('scroll', handleScroll);
       
       // 스타일 초기화
-      const scrollY = document.body.style.top;
       document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      document.body.style.right = '';
-      document.body.style.width = '';
-      document.body.style.height = '';
-      
-      // 스크롤 위치 복원 (setTimeout으로 지연시켜 레이아웃이 안정화된 후 실행)
-      setTimeout(() => {
-        window.scrollTo(0, parseInt(scrollY || '0') * -1);
-      }, 0);
       
       clearTimeout(timer);
     };
@@ -132,9 +113,12 @@ export const ImageGallery = ({ images, initialIndex = 0, onClose }: ImageGallery
         margin: 0,
         padding: 0,
         paddingTop: 'env(safe-area-inset-top, 0)',
-        height: `calc(100vh + ${scrollY}px)`,
+        height: '100vh',
+        width: '100vw',
         maxHeight: 'none',
-        overflowY: 'auto'
+        overflowY: 'auto',
+        transform: 'translateY(0)', // 강제로 위치 고정
+        willChange: 'transform'
       }}
       onClick={handleBackdropClick}
       {...handlers}
@@ -153,7 +137,7 @@ export const ImageGallery = ({ images, initialIndex = 0, onClose }: ImageGallery
               ref={headerRef}
               className="w-full bg-black/90 transition-all duration-300 ease-out"
               style={{
-                height: `${60 + scrollY}px`,
+                height: '80px',
                 minHeight: '60px',
                 position: 'sticky',
                 top: 0,

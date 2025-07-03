@@ -35,12 +35,11 @@ export const projects: Project[] = [
     "category": "mobile",
     "priceTier": "standard",
     "description": "Flutter로 제작된 아름답고 현대적인 포모도로 타이머 앱으로, 집중력 향상과 생산성 향상을 도와줍니다.",
-    "thumbnail": "/images/projects/unnamed.jpg",
+    "thumbnail": "/images/projects/mobile/pomodoro/1.jpg",
     "tags": ["Flutter", "Dart", "Mobile App"],
     "gallery": [
-      "/images/projects/unnamed.jpg",
-      "/images/projects/unnamed.jpg",
-      "/images/projects/unnamed.jpg"
+      "/images/projects/mobile/pomodoro/2.jpg",
+      "/images/projects/mobile/pomodoro/3.jpg"
     ],
     "techStack": [
       "Flutter",
@@ -48,13 +47,31 @@ export const projects: Project[] = [
       "Google Fonts"
     ],
     "details": {
-      "overview": "포모도로 기법을 활용한 생산성 향상 타이머 앱으로, 사용자가 집중 시간과 휴식 시간을 효과적으로 관리할 수 있도록 도와줍니다. Material Design 3를 기반으로 한 현대적이고 직관적인 UI를 제공합니다.",
+      "overview": "포모도로 기법을 활용한 생산성 향상 타이머 앱으로, 사용자가 집중 시간과 휴식 시간을 효과적으로 관리할 수 있도록 도와줍니다. Material Design 3를 기반으로 한 현대적이고 직관적인 UI를 제공하며, 단순함 속에서 강력한 기능을 구현했습니다.",
       "features": [
-        "작업 시간(25분)과 휴식 시간(5분/15분) 타이머",
-        "시각적 진행 표시기",
-        "완료 시 사운드 알림",
-        "다크 모드 지원",
-        "로컬 저장소를 통한 설정 저장"
+        "과학적 포모도로 기법 기반 타이머 시스템",
+        "집중(25분), 단휴식(5분), 장휴식(15분) 자동 전환",
+        "원형 진행 표시기와 부드러운 애니메이션",
+        "완료 시 사운드 알림 시스템",
+        "Material Design 3 기반 현대적 UI",
+        "집중 시간 추적 및 일일 통계"
+      ],
+      "challenges": [
+        {
+          "title": "정확한 타이머 시스템 구현",
+          "description": "백그라운드 상태에서도 정확한 시간 측정과 알림 발송이 필요",
+          "solution": "Flutter의 Timer 클래스와 플랫폼별 백그라운드 처리를 활용하여 정확한 타이밍 보장"
+        },
+        {
+          "title": "부드러운 UI 애니메이션",
+          "description": "원형 진행바와 상태 전환 애니메이션의 성능 최적화 필요",
+          "solution": "CustomPainter와 AnimationController를 활용한 최적화된 애니메이션 구현"
+        },
+        {
+          "title": "사용자 경험 설계",
+          "description": "집중력을 방해하지 않으면서도 직관적인 인터페이스 구현",
+          "solution": "미니멀 디자인과 Material Design 가이드라인을 따른 사용자 친화적 UI 설계"
+        }
       ]
     },
     createdAt: new Date(2025, 5, 31),
@@ -66,21 +83,40 @@ export const projects: Project[] = [
     "category": "mobile",
     "priceTier": "standard",
     "description": "소중한 사람을 위한 특별한 생일 축하 앱",
-    "thumbnail": "/images/projects/birthday-wish.png",
+    "thumbnail": "/images/projects/mobile/birthday-wish/001.png",
     "tags": ["Flutter", "모바일", "축하 카드"],
     "gallery": [
-      "/images/projects/unnamed.jpg",
-      "/images/projects/unnamed.jpg",
-      "/images/projects/unnamed.jpg"
+      "/images/projects/mobile/birthday-wish/002.jpg",
+      "/images/projects/mobile/birthday-wish/003.jpg",
+      "/images/projects/mobile/birthday-wish/004.jpg",
     ],
     "techStack": ["Flutter", "Dart", "Lottie", "Confetti", "Google Fonts"],
     "details": {
       "overview": "이 앱은 특별한 사람을 위한 진심 가득한 선물로, 다양한 사람들의 축하 메시지를 모아 하나의 아름다운 경험으로 만들어줍니다. 생일을 맞은 사람이 앱을 열면 펼쳐지는 화려한 애니메이션과 따뜻한 메시지들은 평생 간직할 소중한 추억이 될 것입니다.",
       "features": [
-        "아름다운 컨페티 애니메이션 효과",
-        "여러 사람의 축하 메시지 슬라이드",
-        "부드러운 페이지 전환 효과",
-        "감성적인 폰트와 색상 구성"
+        "Lottie 기반 화려한 컨페티 애니메이션",
+        "여러 사람의 축하 메시지 슬라이드쇼",
+        "부드러운 페이지 전환 애니메이션",
+        "감성적인 폰트와 색상 테마",
+        "개인 맞춤형 축하 콘텐츠",
+        "터치 제스처 기반 인터랙션",
+      ],
+      "challenges": [
+        {
+          "title": "감성적 사용자 경험 설계",
+          "description": "기술적 완성도와 감정적 몰입감을 동시에 만족시키는 UX 구현 필요",
+          "solution": "심리학적 색상 이론과 애니메이션 타이밍을 연구하여 감성적 몰입을 극대화하는 인터페이스 설계"
+        },
+        {
+          "title": "애니메이션 성능 최적화",
+          "description": "Lottie 애니메이션과 페이지 전환 효과의 동시 실행 시 성능 저하 발생",
+          "solution": "애니메이션 레이어링과 GPU 가속을 활용한 렌더링 최적화로 부드러운 경험 보장"
+        },
+        {
+          "title": "개인화된 콘텐츠 관리",
+          "description": "각 사용자별 맞춤형 메시지와 이미지 콘텐츠의 효율적 관리 시스템 필요",
+          "solution": "모듈형 콘텐츠 아키텍처와 동적 로딩 시스템으로 개인화된 경험 제공"
+        }
       ]
     },
     createdAt: new Date(2025, 5, 31),
@@ -91,13 +127,16 @@ export const projects: Project[] = [
     "category": "mobile",
     "priceTier": "premium",
     "description": "성경 계시록을 공부하기 위한 퀴즈 앱으로, 성경 암기와 이해를 돕습니다.",
-    thumbnail: '/images/projects/bible1.png',
+    thumbnail: '/images/projects/mobile/bible/001.jpg',
     "tags": ["Flutter", "Dart", "Hive", "Provider", "Google Ads"],
     "gallery": [
-      '/images/projects/bible2.png',
-      '/images/projects/bible3.png',
-      '/images/projects/bible4.png',
-      '/images/projects/bible5.png'
+      '/images/projects/mobile/bible/002.jpg',
+      '/images/projects/mobile/bible/003.jpg',
+      '/images/projects/mobile/bible/004.jpg',
+      '/images/projects/mobile/bible/005.jpg',
+      '/images/projects/mobile/bible/006.jpg',
+      '/images/projects/mobile/bible/007.jpg',
+      '/images/projects/mobile/bible/008.jpg'
     ],
     "techStack": [
       "Flutter", 
@@ -109,16 +148,35 @@ export const projects: Project[] = [
       "Window Manager (데스크톱 지원)"
     ],
     "details": {
-      "overview": "성경 계시록을 효과적으로 공부하고 암기할 수 있도록 설계된 퀴즈 앱입니다. 다양한 디자인 테마와 함께 사용자 맞춤형 학습이 가능합니다.",
+      "overview": "성경 계시록을 효과적으로 공부하고 암기할 수 있도록 설계된 프리미엄 퀴즈 앱입니다. 한 달 이상의 집중적인 개발을 통해 완성된 이 앱은 복잡한 UI 상태 관리와 사용자 경험 최적화에 특별히 신경 쓴 고품질 학습 도구입니다. 다양한 디자인 테마와 함께 사용자 맞춤형 학습 경험을 제공합니다.",
       "features": [
-        "빈칸 채우기 퀴즈 제공",
-        "다양한 디자인 테마 지원 (심플, 큐트)",
-        "퀴즈 타이머 기능",
-        "학습 진도 추적",
-        "오프라인 학습 지원",
-        "다크 모드 지원",
-        "데스크톱 및 모바일 플랫폼 호환",
-        "광고 통합 (Google AdMob)"
+        "지능형 빈칸 채우기 퀴즈 시스템",
+        "심플/큐트 등 다양한 디자인 테마",
+        "정확도 기반 퀴즈 타이머 및 진행률 추적",
+        "상세한 학습 통계 및 진도 관리",
+        "완전한 오프라인 학습 지원",
+        "눈 보호를 위한 다크 모드",
+        "데스크톱/모바일 크로스 플랫폼 호환",
+        "Google AdMob 기반 수익화 시스템",
+        "원문 보기/퀴즈 모드 실시간 전환",
+        "포커스 상태 기반 답변 자동 저장"
+      ],
+      "challenges": [
+        {
+          "title": "복잡한 UI 상태 관리 최적화",
+          "description": "원문 보기와 퀴즈 모드 간 전환 시 빈칸 색상 상태와 입력값의 동기화 문제",
+          "solution": "Provider 패턴과 커스텀 컨트롤러를 활용한 상태 관리 시스템 구축. _refreshBlankInputStates 메서드로 UI 상태 강제 리셋 및 복원 기능 구현"
+        },
+        {
+          "title": "실시간 답변 검증 시스템",
+          "description": "포커스된 빈칸에서 수정 후 즉시 정답 제출 시 최신 입력값 반영 누락 문제",
+          "solution": "submitAllAnswers 메서드 개선으로 포커스된 빈칸 값 우선 처리. QuizBlankInput의 _checkAnswer 메서드 최적화로 모든 입력값 실시간 업데이트 보장"
+        },
+        {
+          "title": "크로스 플랫폼 호환성 구현",
+          "description": "데스크톱과 모바일에서 일관된 사용자 경험과 성능 최적화 필요",
+          "solution": "Window Manager와 GetIt 의존성 주입을 활용한 플랫폼별 최적화. 반응형 UI 컴포넌트와 적응형 레이아웃 시스템 구축"
+        }
       ]
     },
     "createdAt": new Date(2025, 4, 29),  // 예시에서 유지
@@ -130,15 +188,15 @@ export const projects: Project[] = [
     category: 'web',
     priceTier: 'deluxe',
     description: 'Next.js 15와 Framer Motion을 활용한 프리미엄 개발자 포트폴리오. 3D 애니메이션과 글라스모피즘 효과로 몰입감 있는 사용자 경험 제공',
-    thumbnail: '/images/projects/portfolio-main.png',
+    thumbnail: '/images/projects/web/portfolio/main.png',
     tags: ['Next.js 15', 'TypeScript', 'Framer Motion', 'Tailwind CSS', '3D Effects'],
     gallery: [
-      '/images/projects/portfolio-main.png',
-      '/images/projects/portfolio-about.png',
-      '/images/projects/portfolio-projects.png',
-      '/images/projects/portfolio-contact.png',
-      '/images/projects/portfolio-mobile.png',
-      '/images/projects/portfolio-dark.png'
+      '/images/projects/web/portfolio/about.png',
+      '/images/projects/web/portfolio/projects.png',
+      '/images/projects/web/portfolio/detail.png',
+      '/images/projects/web/portfolio/contact.png',
+      '/images/projects/web/portfolio/mobile.png',
+      '/images/projects/web/portfolio/dark.png'
     ],
     techStack: [
       'Next.js 15 (App Router)',

@@ -172,7 +172,7 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
         variants={containerVariants}
         className=""
       >
-        <div className="container mx-auto px-4 py-12 max-w-6xl">
+        <div className="container mx-auto px-4 pt-20 pb-12 max-w-6xl">
           <Button asChild variant="ghost" className="mb-6">
             <Link href={`/projects/${project.category}`} className="flex items-center gap-2">
               <ArrowLeft className="h-4 w-4" />

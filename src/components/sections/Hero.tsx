@@ -30,13 +30,9 @@ const socialLinks = [
 
 export function Hero() {
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden -mt-16 pt-16">
-      {/* 🌟 확장된 배경 그라데이션 */}
-      <div className="absolute inset-0 -top-16 bg-white dark:bg-gray-900"></div>
-      <div className="absolute inset-0 -top-16 bg-brand-primary opacity-5 dark:opacity-10"></div>
-      <div className="absolute inset-0 -top-16 bg-gradient-to-br from-transparent via-purple-500/10 to-transparent"></div>
+    <section className="h-[800px] flex items-center justify-center relative overflow-hidden">
       
-      <div className="container mx-auto px-4 py-8 pt-16 md:pt-8 relative z-10">
+      <div className="container mx-auto px-4 py-20 relative z-10">
         <div className="flex flex-col items-center text-center">
           <div className="mb-8">
             {/* 🎨 혁신적인 3D 아바타 */}

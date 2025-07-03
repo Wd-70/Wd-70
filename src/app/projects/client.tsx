@@ -14,7 +14,7 @@ const log = (message: string, data?: unknown) => {
   console.log(`[Projects] ${message}`, data || '');
 };
 
-type ProjectCategory = 'mobile' | 'web' | 'automation';
+type ProjectCategory = 'mobile' | 'web' | 'extention';
 
 // 프로젝트 카드에 필요한 타입 정의
 interface ProjectCardProps {
@@ -42,7 +42,7 @@ interface ProjectCardProps {
 const CATEGORIES = [
   { id: 'mobile', label: '모바일 앱' },
   { id: 'web', label: '웹사이트' },
-  { id: 'automation', label: '업무 자동화' },
+  { id: 'extention', label: '크롬 익스텐션' },
 ] as const;
 
 interface ProjectsClientProps {
@@ -61,7 +61,7 @@ export default function ProjectsClient({ initialCategory = 'mobile' }: ProjectsC
   // Update activeCategory when URL changes
   useEffect(() => {
     const categoryFromPath = pathname?.split('/').pop();
-    if (categoryFromPath && ['mobile', 'web', 'automation'].includes(categoryFromPath)) {
+    if (categoryFromPath && ['mobile', 'web', 'extention'].includes(categoryFromPath)) {
       setActiveCategory(categoryFromPath as ProjectCategory);
     }
   }, [pathname]);
@@ -70,7 +70,7 @@ export default function ProjectsClient({ initialCategory = 'mobile' }: ProjectsC
   useEffect(() => {
     const handlePopState = () => {
       const categoryFromPath = window.location.pathname.split('/').pop();
-      if (categoryFromPath && ['mobile', 'web', 'automation'].includes(categoryFromPath)) {
+      if (categoryFromPath && ['mobile', 'web', 'extention'].includes(categoryFromPath)) {
         setActiveCategory(categoryFromPath as ProjectCategory);
       }
     };
@@ -91,7 +91,7 @@ export default function ProjectsClient({ initialCategory = 'mobile' }: ProjectsC
         // 카테고리 값 검증 및 정규화
         const normalizedCategory = (() => {
           const cat = String(project.category || 'web').toLowerCase() as ProjectCategory;
-          if (['mobile', 'web', 'automation'].includes(cat)) {
+          if (['mobile', 'web', 'extention'].includes(cat)) {
             return cat as ProjectCategory;
           }
           log(`경고: 알 수 없는 카테고리 '${project.category}'를 'web'으로 설정합니다.`, project);
@@ -179,7 +179,7 @@ export default function ProjectsClient({ initialCategory = 'mobile' }: ProjectsC
   }
 
   return (
-    <main className="min-h-screen relative overflow-hidden">
+    <main className="pt-20 relative overflow-hidden">
       {/* 🌟 프리미엄 배경 그라데이션 */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-900/20 dark:via-indigo-900/20 dark:to-purple-900/20"></div>
       <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-cyan-500/10 to-transparent"></div>
@@ -275,17 +275,20 @@ export default function ProjectsClient({ initialCategory = 'mobile' }: ProjectsC
                     <motion.button
                       key={category.id}
                       onClick={() => handleTabChange(category.id)}
+                      style={{
+                        color: activeCategory === category.id ? 'white' : undefined
+                      }}
                       className={`
                         flex-1 relative px-6 py-3 rounded-xl font-semibold transition-all duration-300 text-center
                         ${activeCategory === category.id 
-                          ? 'text-white' 
-                          : 'text-gray-600 dark:text-gray-300 hover:text-brand-primary hover:bg-brand-primary/5'
+                          ? '' 
+                          : 'text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20'
                         }
                       `}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <span className="relative z-20">{category.label}</span>
+                      <span className="relative z-20 pointer-events-none">{category.label}</span>
                     </motion.button>
                   ))}
                 </div>
