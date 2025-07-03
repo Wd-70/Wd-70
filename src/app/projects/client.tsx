@@ -1,11 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { projects as projectsData } from '@/lib/data/projects';
+import { projects as projectsData, ProjectCategory, Project } from '@/lib/data/projects';
 import { ProjectCard } from '@/components/projects/ProjectCard';
-import { Tabs, TabsList, TabsTrigger } from '../../components/ui/tabs';
 
 const _DEBUG_ = false;
 
@@ -14,35 +13,15 @@ const log = (message: string, data?: unknown) => {
   console.log(`[Projects] ${message}`, data || '');
 };
 
-type ProjectCategory = 'mobile' | 'web' | 'extention';
-
-// 프로젝트 카드에 필요한 타입 정의
-interface ProjectCardProps {
-  id: string;
-  title: string;
-  description: string;
-  category: ProjectCategory;
-  priceTier: 'standard' | 'deluxe' | 'premium';
-  thumbnail?: string;
-  image?: string;
-  tags: string[];
-  gallery: string[];
-  techStack: string[];
-  details?: {
-    overview?: string;
-    features?: string[];
-    challenges?: string[];
-    solutions?: string[];
-  };
+// 프로젝트 카드에 필요한 타입 정의 (Project 타입을 기반으로 확장)
+interface ProjectCardProps extends Project {
   slug?: string;
-  createdAt: Date;
-  updatedAt: Date;
 }
 
 const CATEGORIES = [
   { id: 'mobile', label: '모바일 앱' },
   { id: 'web', label: '웹사이트' },
-  { id: 'extention', label: '크롬 익스텐션' },
+  { id: 'automation', label: '자동화' },
 ] as const;
 
 interface ProjectsClientProps {
@@ -50,7 +29,6 @@ interface ProjectsClientProps {
 }
 
 export default function ProjectsClient({ initialCategory = 'mobile' }: ProjectsClientProps = {}) {
-  const router = useRouter();
   const pathname = usePathname();
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>(initialCategory);
   const [isMounted, setIsMounted] = useState(false);
@@ -61,7 +39,7 @@ export default function ProjectsClient({ initialCategory = 'mobile' }: ProjectsC
   // Update activeCategory when URL changes
   useEffect(() => {
     const categoryFromPath = pathname?.split('/').pop();
-    if (categoryFromPath && ['mobile', 'web', 'extention'].includes(categoryFromPath)) {
+    if (categoryFromPath && ['mobile', 'web', 'automation'].includes(categoryFromPath)) {
       setActiveCategory(categoryFromPath as ProjectCategory);
     }
   }, [pathname]);
@@ -70,7 +48,7 @@ export default function ProjectsClient({ initialCategory = 'mobile' }: ProjectsC
   useEffect(() => {
     const handlePopState = () => {
       const categoryFromPath = window.location.pathname.split('/').pop();
-      if (categoryFromPath && ['mobile', 'web', 'extention'].includes(categoryFromPath)) {
+      if (categoryFromPath && ['mobile', 'web', 'automation'].includes(categoryFromPath)) {
         setActiveCategory(categoryFromPath as ProjectCategory);
       }
     };
@@ -91,7 +69,7 @@ export default function ProjectsClient({ initialCategory = 'mobile' }: ProjectsC
         // 카테고리 값 검증 및 정규화
         const normalizedCategory = (() => {
           const cat = String(project.category || 'web').toLowerCase() as ProjectCategory;
-          if (['mobile', 'web', 'extention'].includes(cat)) {
+          if (['mobile', 'web', 'automation'].includes(cat)) {
             return cat as ProjectCategory;
           }
           log(`경고: 알 수 없는 카테고리 '${project.category}'를 'web'으로 설정합니다.`, project);
@@ -271,7 +249,7 @@ export default function ProjectsClient({ initialCategory = 'mobile' }: ProjectsC
             <div className="relative max-w-2xl mx-auto mb-12">
               <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/50 dark:border-gray-700/50 rounded-2xl p-2 shadow-lg">
                 <div className="flex">
-                  {CATEGORIES.map((category, index) => (
+                  {CATEGORIES.map((category) => (
                     <motion.button
                       key={category.id}
                       onClick={() => handleTabChange(category.id)}

@@ -1,6 +1,5 @@
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { FaGithub, FaTwitter, FaLinkedin, FaHeart } from "react-icons/fa";
+import { FaGithub, FaHeart } from "react-icons/fa";
 import { SiNextdotjs, SiTailwindcss, SiFramer, SiTypescript, SiReact } from "react-icons/si";
 
 const socialLinks = [

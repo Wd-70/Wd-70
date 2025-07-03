@@ -14,7 +14,6 @@ interface ImageGalleryProps {
 export const ImageGallery = ({ images, initialIndex = 0, onClose }: ImageGalleryProps) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [isOpen, setIsOpen] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
   const headerRef = useRef<HTMLDivElement>(null);
 
   // 스크롤 이벤트 핸들러
@@ -28,8 +27,7 @@ export const ImageGallery = ({ images, initialIndex = 0, onClose }: ImageGallery
   // 모달이 열릴 때 body 스크롤 방지 및 스크롤 위치 저장
   useEffect(() => {
     // 현재 스크롤 위치 저장
-    const savedScrollY = window.scrollY;
-    setScrollY(0); // 모달에서는 스크롤 위치 무시
+    window.scrollY;
     
     // body에 스타일 적용 (스크롤 방지, 위치는 고정하지 않음)
     document.body.style.overflow = 'hidden';

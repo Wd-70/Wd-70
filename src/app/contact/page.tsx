@@ -1,6 +1,5 @@
 'use client';
 
-import { Metadata } from 'next';
 import { motion } from 'framer-motion';
 import { ContactForm } from '@/components/contact/ContactForm';
 import { FiMail, FiGithub, FiMapPin, FiClock, FiZap, FiHeart, FiStar } from 'react-icons/fi';

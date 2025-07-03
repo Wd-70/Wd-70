@@ -41,7 +41,7 @@ export function ContactForm() {
         body: JSON.stringify(data),
       });
 
-      const result = await response.json();
+      await response.json();
 
       if (!response.ok) {
         const errorData = await response.json();

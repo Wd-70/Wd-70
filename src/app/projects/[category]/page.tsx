@@ -1,9 +1,10 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import ProjectsClient from '../client';
+import { ProjectCategory } from '@/lib/data/projects';
 
 type CategoryParams = {
-  category: 'mobile' | 'web' | 'extention';
+  category: ProjectCategory;
 };
 
 type Props = {
@@ -18,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const categoryName = {
     mobile: '모바일 앱',
     web: '웹사이트',
-    extention: '크롬 익스텐션'
+    automation: '자동화'
   }[category] || '프로젝트';
 
   return {
@@ -36,7 +37,7 @@ export default async function CategoryProjectsPage({ params }: Props) {
   const { category } = await Promise.resolve(params);
   
   // 유효한 카테고리인지 확인
-  const validCategories = ['mobile', 'web', 'extention'];
+  const validCategories: ProjectCategory[] = ['mobile', 'web', 'automation'];
   if (!validCategories.includes(category)) {
     notFound();
   }
@@ -45,11 +46,11 @@ export default async function CategoryProjectsPage({ params }: Props) {
 }
 
 // 정적 생성 시 경로 생성
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<{ category: ProjectCategory }[]> {
   return [
     { category: 'mobile' },
     { category: 'web' },
-    { category: 'extention' },
+    { category: 'automation' },
   ];
 }
 

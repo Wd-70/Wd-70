@@ -25,7 +25,11 @@ export interface Project {
   details?: {
     overview?: string;
     features?: string[];
-    challenges?: string[];
+    challenges?: {
+      title: string;
+      description: string;
+      solution?: string;
+    }[];
     solutions?: string[];
   };
   createdAt: Date;

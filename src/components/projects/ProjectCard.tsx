@@ -10,14 +10,11 @@ import { Project } from '@/lib/data/projects';
 
 type PriceTier = 'standard' | 'deluxe' | 'deluxe-plus' | 'premium';
 
-interface ProjectWithOptionalPriceTier extends Omit<Project, 'priceTier' | 'thumbnail' | 'image'> {
-  priceTier?: PriceTier;
-  thumbnail?: string;
-  image?: string;
-}
-
 interface ProjectCardProps {
-  project: ProjectWithOptionalPriceTier;
+  project: Project & {
+    image?: string;
+    slug?: string;
+  };
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
@@ -62,7 +59,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const tierInfo = getTierInfo(project.priceTier || 'standard');
 
   // Handle project click with smooth navigation
-  const handleProjectClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleProjectClick = () => {
     // Let Next.js handle the navigation naturally without forcing scroll to top
   };
 

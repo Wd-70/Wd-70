@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Project } from '@/lib/data/projects';
-import { FiClock, FiPlay, FiPause, FiSettings, FiBarChart, FiMoon, FiDownload } from 'react-icons/fi';
+import { FiClock, FiPlay, FiSettings, FiBarChart, FiDownload } from 'react-icons/fi';
 
 interface PomodoroTimerDetailProps {
   project: Project;

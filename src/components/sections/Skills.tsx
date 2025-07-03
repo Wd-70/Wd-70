@@ -81,7 +81,7 @@ export default function Skills() {
         </motion.div>
 
         <div className="space-y-16">
-          {skillCategories.map((category, categoryIndex) => (
+          {skillCategories.map((category) => (
             <motion.div 
               key={category.category}
               variants={categoryVariants}
