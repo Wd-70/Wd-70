@@ -2,7 +2,6 @@
 
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import dynamic from 'next/dynamic';
 
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/layout/Header";
