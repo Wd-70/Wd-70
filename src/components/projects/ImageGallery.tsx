@@ -71,12 +71,14 @@ export const ImageGallery = ({ images, initialIndex = 0, onClose }: ImageGallery
 
   // 외부 클릭 시 닫기
   const handleBackdropClick = (e: React.MouseEvent) => {
-    // 클릭된 요소가 이미지나 네비게이션 버튼이 아닌 경우에만 닫기
+    // 클릭된 요소가 이미지, 네비게이션 버튼, 썸네일이 아닌 경우에만 닫기
     const target = e.target as HTMLElement;
-    const isImage = target.closest('img') || target.closest('button');
+    const isButton = target.closest('button');
+    const isImage = target.tagName === 'IMG';
     const isThumbnail = target.closest('.thumbnail-container');
+    const isHeader = target.closest('.modal-header');
     
-    if (!isImage && !isThumbnail) {
+    if (!isButton && !isImage && !isThumbnail && !isHeader) {
       handleClose();
     }
   };
@@ -120,7 +122,7 @@ export const ImageGallery = ({ images, initialIndex = 0, onClose }: ImageGallery
             {/* 상단 안전 영역 (상단바 대체용) */}
             <div 
               ref={headerRef}
-              className="w-full bg-black/90 transition-all duration-300 ease-out"
+              className="w-full bg-black/90 transition-all duration-300 ease-out modal-header"
               style={{
                 height: '80px',
                 minHeight: '60px',
@@ -157,23 +159,27 @@ export const ImageGallery = ({ images, initialIndex = 0, onClose }: ImageGallery
               <div className="relative w-full max-w-4xl h-full flex items-center justify-center">
                 <div className="relative w-full h-full max-h-full flex items-center justify-center">
                   {images[currentIndex] ? (
-                    <div style={{
-                      position: 'relative',
-                      width: '100%',
-                      height: '100%',
-                      maxWidth: '100%',
-                      maxHeight: '100%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}>
+                    <div 
+                      style={{
+                        position: 'relative',
+                        maxWidth: '90vw',
+                        maxHeight: '70vh',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                      onClick={(e) => e.stopPropagation()}
+                    >
                       <Image
                         src={images[currentIndex]}
                         alt={`이미지 ${currentIndex + 1}`}
-                        fill
-                        className="object-contain"
+                        width={0}
+                        height={0}
+                        sizes="90vw"
+                        className="w-auto h-auto max-w-full max-h-full object-contain"
                         style={{
-                          objectFit: 'contain'
+                          maxWidth: '90vw',
+                          maxHeight: '70vh'
                         }}
                         onError={handleImageError}
                         priority
