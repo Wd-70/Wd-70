@@ -14,6 +14,7 @@ interface ImageGalleryProps {
 export const ImageGallery = ({ images, initialIndex = 0, onClose }: ImageGalleryProps) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [isOpen, setIsOpen] = useState(false);
+  const [scrollOffset, setScrollOffset] = useState(0);
   const headerRef = useRef<HTMLDivElement>(null);
 
   // 스크롤 이벤트 핸들러
@@ -24,29 +25,24 @@ export const ImageGallery = ({ images, initialIndex = 0, onClose }: ImageGallery
     }
   }, []);
 
-  // 모달이 열릴 때 body 스크롤 방지 및 스크롤 위치 저장
+  // 모달이 열릴 때 현재 스크롤 위치 저장 및 body 고정
   useEffect(() => {
     // 현재 스크롤 위치 저장
-    // window.scrollY;
+    const savedScrollY = window.scrollY;
+    setScrollOffset(savedScrollY);
     
-    // body에 스타일 적용 (스크롤 방지, 위치는 고정하지 않음)
+    // body 스크롤 방지
     document.body.style.overflow = 'hidden';
-    
-    // 스크롤 이벤트 리스너 추가
-    window.addEventListener('scroll', handleScroll);
     
     const timer = setTimeout(() => setIsOpen(true), 10);
     
     return () => {
-      // 이벤트 리스너 제거
-      window.removeEventListener('scroll', handleScroll);
-      
       // 스타일 초기화
       document.body.style.overflow = '';
       
       clearTimeout(timer);
     };
-  }, [handleScroll]);
+  }, []);
 
   const goToPrevious = useCallback(() => {
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
@@ -101,22 +97,20 @@ export const ImageGallery = ({ images, initialIndex = 0, onClose }: ImageGallery
 
   return (
     <div
-      className="fixed inset-0 z-50 flex flex-col bg-black/90 backdrop-blur-sm w-screen overflow-hidden"
+      className="fixed inset-0 z-50 flex flex-col bg-black/90 backdrop-blur-sm"
       style={{
         position: 'fixed',
-        top: 0,
+        top: scrollOffset,
         left: 0,
         right: 0,
-        bottom: 0,
+        bottom: scrollOffset - window.innerHeight,
         margin: 0,
         padding: 0,
-        paddingTop: 'env(safe-area-inset-top, 0)',
         height: '100vh',
         width: '100vw',
-        maxHeight: 'none',
-        overflowY: 'auto',
-        transform: 'translateY(0)', // 강제로 위치 고정
-        willChange: 'transform'
+        overflow: 'hidden',
+        transform: 'translate3d(0, 0, 0)',
+        zIndex: 9999
       }}
       onClick={handleBackdropClick}
       {...handlers}
@@ -137,8 +131,10 @@ export const ImageGallery = ({ images, initialIndex = 0, onClose }: ImageGallery
               style={{
                 height: '80px',
                 minHeight: '60px',
-                position: 'sticky',
+                position: 'absolute',
                 top: 0,
+                left: 0,
+                right: 0,
                 zIndex: 100,
                 display: 'flex',
                 alignItems: 'flex-end',
@@ -158,12 +154,11 @@ export const ImageGallery = ({ images, initialIndex = 0, onClose }: ImageGallery
 
             {/* 메인 이미지 */}
             <div 
-              className="flex-1 flex items-center justify-center p-4 w-full overflow-auto" 
+              className="absolute inset-0 flex items-center justify-center p-4 w-full" 
               style={{ 
-                minHeight: 'calc(100vh - 120px)',
-                paddingTop: '1rem',
-                boxSizing: 'border-box',
-                WebkitOverflowScrolling: 'touch' // iOS에서 부드러운 스크롤링
+                paddingTop: '80px',
+                paddingBottom: '100px',
+                boxSizing: 'border-box'
               }}
             >
               <div className="relative w-full max-w-4xl h-full flex items-center justify-center">
@@ -201,7 +196,10 @@ export const ImageGallery = ({ images, initialIndex = 0, onClose }: ImageGallery
             </div>
 
             {/* 썸네일 목록 */}
-            <div className="h-24 bg-black/50 overflow-x-auto overflow-y-hidden py-2 w-full thumbnail-container">
+            <div 
+              className="absolute bottom-0 left-0 right-0 h-24 bg-black/50 overflow-x-auto overflow-y-hidden py-2 w-full thumbnail-container"
+              style={{ zIndex: 101 }}
+            >
               <div className="flex gap-2 px-4 h-full items-center justify-center">
                 {images.map((img, index) => (
                   <button
