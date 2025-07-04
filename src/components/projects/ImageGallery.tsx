@@ -17,13 +17,6 @@ export const ImageGallery = ({ images, initialIndex = 0, onClose }: ImageGallery
   const [scrollOffset, setScrollOffset] = useState(0);
   const headerRef = useRef<HTMLDivElement>(null);
 
-  // 스크롤 이벤트 핸들러
-  const handleScroll = useCallback(() => {
-    if (headerRef.current) {
-      // const scrollPosition = window.scrollY || document.documentElement.scrollTop;
-      // setScrollY(Math.min(scrollPosition, 100)); // 최대 100px까지 늘어나도록 제한
-    }
-  }, []);
 
   // 모달이 열릴 때 현재 스크롤 위치 저장 및 body 고정
   useEffect(() => {
