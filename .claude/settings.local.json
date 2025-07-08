@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rg:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "mcp__ide__getDiagnostics",
+      "WebFetch(domain:kmong.com)",
+      "WebFetch(domain:kmong.com)",
+      "WebFetch(domain:kmong.com)",
+      "WebFetch(domain:kmong.com)",
+      "WebFetch(domain:kmong.com)"
+    ],
+    "deny": []
+  }
+}

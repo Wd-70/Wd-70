@@ -5,28 +5,28 @@ import { FiGithub, FiMail } from "react-icons/fi";
 import { TypeAnimation } from "react-type-animation";
 import Link from "next/link";
 
-const socialLinks = [
-  {
-    name: "GitHub",
-    href: "https://github.com/Wd-70",
-    icon: FiGithub,
-  },
-  // {
-  //   name: "Twitter",
-  //   href: "https://x.com/KeNN7052",
-  //   icon: FiTwitter,
-  // },
-  // {
-  //   name: "LinkedIn",
-  //   href: "https://linkedin.com/in/yourusername",
-  //   icon: FiLinkedin,
-  // },
-  {
-    name: "Email",
-    href: "mailto:kjk7052@gmail.com",
-    icon: FiMail,
-  },
-];
+// const socialLinks = [
+//   {
+//     name: "GitHub",
+//     href: "https://github.com/Wd-70",
+//     icon: FiGithub,
+//   },
+//   // {
+//   //   name: "Twitter",
+//   //   href: "https://x.com/KeNN7052",
+//   //   icon: FiTwitter,
+//   // },
+//   // {
+//   //   name: "LinkedIn",
+//   //   href: "https://linkedin.com/in/yourusername",
+//   //   icon: FiLinkedin,
+//   // },
+//   {
+//     name: "Email",
+//     href: "mailto:kjk7052@gmail.com",
+//     icon: FiMail,
+//   },
+// ];
 
 export function Hero() {
   return (
@@ -112,15 +112,15 @@ export function Hero() {
               <span className="relative z-10">프로젝트 보기</span>
               <div className="absolute inset-0 bg-brand-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </Link>
-            <Link
+            {/* <Link
               href="/contact"
               className="group relative px-8 py-3 bg-white/10 dark:bg-gray-800/50 backdrop-blur-sm hover:bg-white/20 dark:hover:bg-gray-700/70 text-gray-800 dark:text-white border border-white/20 dark:border-gray-600/50 font-medium rounded-lg transition-all duration-300 hover:scale-105 hover-glow-accent"
             >
               <span className="relative z-10">연락하기</span>
-            </Link>
+            </Link> */}
           </motion.div>
 
-          <motion.div 
+          {/* <motion.div 
             className="flex space-x-6 mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -142,7 +142,7 @@ export function Hero() {
                 <item.icon className="h-6 w-6 text-gray-500 dark:text-gray-400 group-hover:text-white transition-colors duration-300" />
               </motion.a>
             ))}
-          </motion.div>
+          </motion.div> */}
         </div>
       </div>
       {/* 🎯 개선된 스크롤 인디케이터 */}

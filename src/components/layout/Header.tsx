@@ -11,7 +11,7 @@ const navItems = [
   { name: "홈", href: "/" },
   { name: "소개", href: "/about" },
   { name: "프로젝트", href: "/projects" },
-  { name: "연락처", href: "/contact" },
+  // { name: "연락처", href: "/contact" },
 ];
 
 export function Header() {

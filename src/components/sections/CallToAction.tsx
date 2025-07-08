@@ -41,7 +41,7 @@ export default function CallToAction() {
           transition={{ delay: 0.4 }}
         >
           {/* 연락하기 버튼 */}
-          <motion.div
+          {/* <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -57,7 +57,7 @@ export default function CallToAction() {
               />
               <FiArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
-          </motion.div>
+          </motion.div> */}
 
           {/* 프로젝트 보기 버튼 */}
           <motion.div

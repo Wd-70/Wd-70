@@ -165,7 +165,7 @@ export function Footer() {
           </motion.div>
 
           {/* 🚀 소셜 링크 섹션 */}
-          {/* <motion.div className="flex flex-col items-center lg:items-end" variants={itemVariants}>
+          <motion.div className="flex flex-col items-center lg:items-end" variants={itemVariants}>
             <h3 className="text-gray-800 dark:text-white font-semibold mb-4">Connect with me</h3>
             <div className="flex space-x-4">
               {socialLinks.map((item, index) => (
@@ -191,7 +191,7 @@ export function Footer() {
                 </motion.a>
               ))}
             </div>
-          </motion.div> */}
+          </motion.div>
         </div>
 
         {/* 🛠️ 기술 스택 섹션 */}
