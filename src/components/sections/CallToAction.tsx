@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { motion } from "framer-motion";
-import { FiMail, FiArrowRight, FiFolder } from "react-icons/fi";
+import { /* FiMail, */ FiArrowRight, FiFolder } from "react-icons/fi";
 
 export default function CallToAction() {
   return (

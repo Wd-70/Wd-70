@@ -1,27 +1,27 @@
 import { motion } from "framer-motion";
-import { FaGithub, FaHeart } from "react-icons/fa";
+import { /* FaGithub, */ FaHeart } from "react-icons/fa";
 import { SiNextdotjs, SiTailwindcss, SiFramer, SiTypescript, SiReact } from "react-icons/si";
 
-const socialLinks = [
-  // {
-  //   name: "GitHub",
-  //   href: "https://github.com/Wd-70",
-  //   icon: FaGithub,
-  //   color: "hover:text-gray-900 dark:hover:text-white"
-  // },
-  // {
-  //   name: "Twitter",
-  //   href: "https://twitter.com/yourusername",
-  //   icon: FaTwitter,
-  //   color: "hover:text-blue-500"
-  // },
-  // {
-  //   name: "LinkedIn",
-  //   href: "https://linkedin.com/in/yourusername",
-  //   icon: FaLinkedin,
-  //   color: "hover:text-blue-600"
-  // },
-];
+// const socialLinks = [
+//   // {
+//   //   name: "GitHub",
+//   //   href: "https://github.com/Wd-70",
+//   //   icon: FaGithub,
+//   //   color: "hover:text-gray-900 dark:hover:text-white"
+//   // },
+//   // {
+//   //   name: "Twitter",
+//   //   href: "https://twitter.com/yourusername",
+//   //   icon: FaTwitter,
+//   //   color: "hover:text-blue-500"
+//   // },
+//   // {
+//   //   name: "LinkedIn",
+//   //   href: "https://linkedin.com/in/yourusername",
+//   //   icon: FaLinkedin,
+//   //   color: "hover:text-blue-600"
+//   // },
+// ];
 
 const techStack = [
   { name: "Next.js", icon: SiNextdotjs, color: "text-black dark:text-white" },
