@@ -279,13 +279,13 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
             )}
           </div>
             
-          <div className="mt-8 flex gap-4">
+          {/* <div className="mt-8 flex gap-4">
             <Button asChild>
               <Link href="/contact">
                 문의하기
               </Link>
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
 

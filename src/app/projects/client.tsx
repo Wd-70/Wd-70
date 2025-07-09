@@ -378,7 +378,7 @@ export default function ProjectsClient({ initialCategory = 'mobile' }: ProjectsC
         </div>
 
         {/* 🎯 하단 Call to Action */}
-        <div className="text-center mt-20">
+        {/* <div className="text-center mt-20">
           <div className="relative p-8 rounded-2xl bg-brand-primary/10 backdrop-blur-sm border border-brand-primary/20 max-w-4xl mx-auto">
             <div className="absolute inset-0 bg-brand-primary opacity-5 rounded-2xl"></div>
             <motion.div
@@ -404,7 +404,7 @@ export default function ProjectsClient({ initialCategory = 'mobile' }: ProjectsC
               </motion.a>
             </motion.div>
           </div>
-        </div>
+        </div> */}
       </div>
     </main>
   );
